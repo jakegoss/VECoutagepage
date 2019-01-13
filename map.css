@@ -1,0 +1,13 @@
+#mapid {
+    height: 75vh;
+    width: 50vw;
+}
+table {
+        border-collapse: collapse;
+        border: 2px black solid;
+        font: 12px sans-serif;
+    }
+    td {
+        border: 1px black solid;
+        padding: 5px;
+    }
