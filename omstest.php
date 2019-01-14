@@ -25,9 +25,9 @@
 }
 
 $array = array(
-    array('Town'=>'Troy', 'Meter #'=>'12', 'Time Off'=>'01/12 11:20am', 'Estimated Restoration Time'=>'example ltd'),
-    array('Town'=>'Albany', 'Meter #'=>'44', 'Time Off'=>'01/12 11:20am', 'Estimated Restoration Time'=>'example ltd'),
-    array('Town'=>'Stowe', 'Meter #'=>'23', 'Time Off'=>'01/12 11:20am', 'Estimated Restoration Time'=>'example ltd')
+    array('Town'=>'Troy', 'Meter #'=>'12', 'Time Off'=>'01/12 9:20am', 'Estimated Restoration Time'=>'01/13 10:30am'),
+    array('Town'=>'Albany', 'Meter #'=>'44', 'Time Off'=>'01/12 11:33am', 'Estimated Restoration Time'=>'01/13 10:00am'),
+    array('Town'=>'Stowe', 'Meter #'=>'23', 'Time Off'=>'01/12 01:51pm', 'Estimated Restoration Time'=>'01/13 12:10pm')
 );
 
 echo build_table($array);
