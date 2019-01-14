@@ -1,3 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>OMS submit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+</head>
+<body>
+    
+
+<div>
+    Town<input type="text"><br/>
+    Meter#<input type="number"><br/>
+    Time Off<input type="datetime-local"><br/>
+    Estimated Restoration Time<input type="datetime-local">
+</div>
+
+
+
 <?php
     function build_table($array){
     // start table
@@ -30,5 +51,10 @@ $array = array(
     array('Town'=>'Stowe', 'Meter #'=>'23', 'Time Off'=>'01/12 01:51pm', 'Estimated Restoration Time'=>'01/13 12:10pm')
 );
 
-echo build_table($array);
 ?>
+</body>
+</html>
+
+
+
+
