@@ -25,7 +25,7 @@
 
         <?php
         include 'omstest.php';
-        echo build_table($array);
+        // echo build_table($array);
     ?>
     </div>
 

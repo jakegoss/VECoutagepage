@@ -1,3 +1,7 @@
+<?php
+require_once 'all_outages.csv';
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,50 +25,45 @@
 
 <?php
 
+
+
+// W3 table solution
+
 echo "<table style='border: solid 1px black;'>";
- echo "<tr><th>Id</th><th>Firstname</th><th>Lastname</th></tr>";
+echo "<tr>
+ <th>tk</th>
+ <th>town</th>
+ <th>off</th>
+ <th>on</th>
+ <th>cause</th>
+ <th>desc</th>
+ </tr>";
 
-class TableRows extends RecursiveIteratorIterator { 
-    function __construct($it) { 
-        parent::__construct($it, self::LEAVES_ONLY); 
+class TableRows extends RecursiveIteratorIterator
+{
+    public function __construct($it)
+    {
+        parent::__construct($it, self::LEAVES_ONLY);
     }
 
-    function current() {
-        return "<td style='width: 150px; border: 1px solid black;'>" . parent::current(). "</td>";
+    public function current()
+    {
+        return "<td style='width: 150px; border: 1px solid black;'>" . parent::current() . "</td>";
     }
 
-    function beginChildren() { 
-        echo "<tr>"; 
-    } 
+    public function beginChildren()
+    {
+        echo "<tr>";
+    }
 
-    function endChildren() { 
+    public function endChildren()
+    {
         echo "</tr>" . "\n";
-    } 
-} 
-
-$host  = "localhost";
-$user = "vec_oms";
-$pass = "i2NoTgNkB9am";
-$database = "vec_oms";
-
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $stmt = $conn->prepare("SELECT id, firstname, lastname FROM MyGuests"); 
-    $stmt->execute();
-
-    // set the resulting array to associative
-    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
-
-    foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) { 
-        echo $v;
     }
 }
-catch(PDOException $e) {
-    echo "Error: " . $e->getMessage();
-}
-$conn = null;
-echo "</table>";
+
+
+
 
 //   -------- Build table function-----------
 
