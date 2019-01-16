@@ -23,10 +23,7 @@
 
         
 
-        <?php
-        include 'omstest.php';
-        // echo build_table($array);
-    ?>
+     
     </div>
 
     <!----------------- Map area ---------------------->

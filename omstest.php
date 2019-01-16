@@ -1,5 +1,5 @@
 <?php
-include_once 'lib/dbh.oms.php';
+include_once "lib/dbh.oms.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,22 +12,6 @@ include_once 'lib/dbh.oms.php';
 </head>
 <body>
 
-<!-- input new outages -->
-<div>
-    Town<input type="text"><br/>
-    <br/>
-    Time Off<input type="datetime-local"><br/>
-    <br/>
-    Estimated Restoration Time<input type="datetime-local"><br/>
-    <br/>
-    Meter#<input type="number"><br/>
-    <br/>
-    Cause<input type="text"><br/>
-    <br/>
-    Equipment Code<input type="text">
-
-</div>
-
 <!-- display table of outages -->
 
 <?php
@@ -35,12 +19,20 @@ include_once 'lib/dbh.oms.php';
 $sql = "SELECT * FROM outagedata;";
 $result = mysqli_query($conn, $sql);
 $resultCheck = mysqli_num_rows($result);
-
+$outs = array();
 if ($resultCheck > 0) {
     while($row = mysqli_fetch_assoc($result)) {
-        echo $row['town'] . "<br>";
+        $outs[] = $row;
     }
 }
+
+foreach ($outs[1] as $out) {
+    echo $out . " ";
+}
+foreach ($outs as $out) {
+    echo $out['tk'] . "<br>";
+}
+
 
 ?>
 
