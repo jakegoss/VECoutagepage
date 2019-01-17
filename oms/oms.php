@@ -15,7 +15,7 @@
 <?php
 $host  = "localhost";
 $user = "vec_oms";
-$pass = "";
+$pass = "i2NoTgNkB9am";
 $database = "vec_oms";
 
 $total = 0;
