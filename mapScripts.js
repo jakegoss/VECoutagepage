@@ -91,7 +91,7 @@ info.onAdd = function (map) {
 info.update = function (props) {
     this._div.innerHTML = '<h4>Current number of Outages in</h4>' +  (props ?
         '<b>' + props.town + '</b><br />' + props.density
-        : 'Hover over a state');
+        : 'Hover over a town');
 };
 
 info.addTo(map);

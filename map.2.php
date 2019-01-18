@@ -23,12 +23,12 @@ include_once "lib/dbh.oms.php";
 
 </head>
 
-<body>
+<body class="container">
 
     <!----------------- Limited Table area ------------------------>
     <div id="smallOutTbl">
 
-        <h2>Current Outages in Vermont Electric COOP service area</h2>
+        <!-- <h2>Current Outages in Vermont Electric COOP service area</h2> -->
         <?php
 
 $sql = "SELECT * FROM outagedata;";
@@ -40,7 +40,7 @@ $resultCheck = mysqli_num_rows($result);
             <tr class="header" style="font-weight:bold">
                 
                 <td>Town</td>
-                <td>Meter #</td>
+                <td># of Meters</td>
                 <td>Time Out</td>
                 <td>Estimated Restoration Time</td>
                 
@@ -52,7 +52,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<td>" . $row['town'] . "</td>";
     echo "<td>" . $row['numout'] . "</td>";
     echo "<td>" . $row['off'] . "</td>";
-    echo "<td>" . $row['backon'] . "</td>";
+    echo "<td>" . $row['eston'] . "</td>";
     echo "</tr>";
     
 }
@@ -65,11 +65,11 @@ if($resultCheck == 0) echo "<h3>There are not outages at this time</h3>";
     </div>
 
     <!----------------- Map area ---------------------->
-    <div id="mapid"></div>
+    <!-- <div id="mapid"></div>
     
     
     <script src="lib/serviceTowns.js"></script>
-    <script src="mapScripts.js"></script>
+    <script src="mapScripts.js"></script> -->
     
     
     <!----------------- Full Data Table ---------------------->
@@ -79,32 +79,32 @@ if($resultCheck == 0) echo "<h3>There are not outages at this time</h3>";
         
         <?php
 
-$sql = "SELECT * FROM outagedata;";
+$sql = "SELECT * FROM outages;";
 $result = mysqli_query($conn, $sql);
 $resultCheck = mysqli_num_rows($result);
 
 ?>
         <table class="striped" style="text-align: center">
             <tr class="header" style="font-weight:bold">
-                <td>Ticket</td>
+                <!-- <td>Ticket</td> -->
                 <td>Town</td>
+                <td># of Meters</td>
                 <td>Time Out</td>
-                <td>Estimated Restoration Time</td>
-                <td>Meter #</td>
+                <td>Time On</td>
                 <td>Cause</td>
-                <td>Equipment Code</td>
+                <!-- <td>Equipment Code</td> -->
             </tr>
             <?php
 
 while ($row = mysqli_fetch_assoc($result)) {
     echo "<tr>";
-    echo "<td>" . $row['tk'] . "</td>";
+    // echo "<td>" . $row['tk'] . "</td>";
     echo "<td>" . $row['town'] . "</td>";
+    echo "<td>" . $row['numout'] . "</td>";
     echo "<td>" . $row['off'] . "</td>";
     echo "<td>" . $row['backon'] . "</td>";
-    echo "<td>" . $row['numout'] . "</td>";
     echo "<td>" . $row['cause'] . "</td>";
-    echo "<td>" . $row['equipcode'] . "</td>";
+    // echo "<td>" . $row['equipcode'] . "</td>";
     echo "</tr>";
     
 }
