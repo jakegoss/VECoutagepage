@@ -9,7 +9,7 @@ include_once "lib/dbh.oms.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Map</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="map.css" />
+    <link rel="stylesheet" href="lib/map.css" />
     <link rel="stylesheet" href="lib/leaflet.css" />
     <script src="lib/leaflet.js"></script>
     <script src="cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
@@ -65,11 +65,11 @@ if($resultCheck == 0) echo "<h3>There are not outages at this time</h3>";
     </div>
 
     <!----------------- Map area ---------------------->
-    <!-- <div id="mapid"></div>
+    <div id="mapid"></div>
     
     
     <script src="lib/serviceTowns.js"></script>
-    <script src="mapScripts.js"></script> -->
+    <script src="lib/mapScripts.js"></script>
     
     
     <!----------------- Full Data Table ---------------------->
