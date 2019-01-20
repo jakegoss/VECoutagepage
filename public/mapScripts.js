@@ -1,10 +1,11 @@
 // set initial map view point
-var map = L.map('mapid').setView([44.5, -72.6034], 8);
+var map = L.map('mapid',{doubleClickZoom:false,zoomControl:false}).setView([44.5, -72.6034], 8);
 
 // add map tile layer and set max zoom
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href=”http://osm.org/copyright”>OpenStreetMap</a> contributors',
     maxZoom: 11,
+    clicktozoom: false, 
 }).addTo(map);
 
 

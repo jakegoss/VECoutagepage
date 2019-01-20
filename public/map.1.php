@@ -81,8 +81,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     <div id="mapid"></div>
     
     
-    
-    
+
     <!----------------- Full Data Table ---------------------->
     
     <div id="bigOutTbl">
@@ -90,12 +89,12 @@ while ($row = mysqli_fetch_assoc($result)) {
         
         <?php
 
-$sql = "SELECT * FROM outages;";
-$result = mysqli_query($conn, $sql);
-// $resultCheck = mysqli_num_rows($result);
+// $sql = "SELECT * FROM outages;";
+// $result = mysqli_query($conn, $sql);
+
 
 ?>
-        <table class="striped" style="text-align: center">
+        <!-- <table class="striped" style="text-align: center">
             <tr class="header" style="font-weight:bold">
                 <td>Town</td>
                 <td># of Meters</td>
@@ -103,26 +102,26 @@ $result = mysqli_query($conn, $sql);
                 <td>Time On</td>
                 <td>Cause</td>
 
-            </tr>
+            </tr> -->
             <?php
 
-while ($row = mysqli_fetch_assoc($result)) {
-    echo "<tr>";
-    // echo "<td>" . $row['tk'] . "</td>";
-    echo "<td>" . $row['town'] . "</td>";
-    echo "<td>" . $row['numout'] . "</td>";
-    echo "<td>" . $row['off'] . "</td>";
-    echo "<td>" . $row['backon'] . "</td>";
-    echo "<td>" . $row['cause'] . "</td>";
-    // echo "<td>" . $row['equipcode'] . "</td>";
-    echo "</tr>";
+// while ($row = mysqli_fetch_assoc($result)) {
+//     echo "<tr>";
+//     // echo "<td>" . $row['tk'] . "</td>";
+//     echo "<td>" . $row['town'] . "</td>";
+//     echo "<td>" . $row['numout'] . "</td>";
+//     echo "<td>" . $row['off'] . "</td>";
+//     echo "<td>" . $row['backon'] . "</td>";
+//     echo "<td>" . $row['cause'] . "</td>";
+//     // echo "<td>" . $row['equipcode'] . "</td>";
+//     echo "</tr>";
     
-}
-// if($result == 0) echo "<h3>There are not outages at this time</h3>";
 
 
+// </table>
+
+// if($result < 1) echo "<h3>There are not outages at this time</h3>";
 ?>
-        </table>
 
     </div>
 
