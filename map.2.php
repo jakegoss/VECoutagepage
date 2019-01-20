@@ -20,7 +20,7 @@ include_once "lib/dbh.oms.php";
                $('.striped tr:even');
             });
         </script>
-
+ 
 </head>
 
 <body class="container">
@@ -65,11 +65,22 @@ if($resultCheck == 0) echo "<h3>There are not outages at this time</h3>";
     </div>
 
     <!----------------- Map area ---------------------->
+<?php
+
+$sql = "SELECT * FROM outagedata;";
+$result = mysqli_query($conn, $sql);
+
+$json_array = array();
+
+while ($row = mysqli_fetch_assoc($result)) {
+    $json_array[] = $row;
+}
+
+?>  
+
     <div id="mapid"></div>
     
     
-    <script src="lib/serviceTowns.js"></script>
-    <script src="lib/mapScripts.js"></script>
     
     
     <!----------------- Full Data Table ---------------------->
@@ -81,18 +92,17 @@ if($resultCheck == 0) echo "<h3>There are not outages at this time</h3>";
 
 $sql = "SELECT * FROM outages;";
 $result = mysqli_query($conn, $sql);
-$resultCheck = mysqli_num_rows($result);
+// $resultCheck = mysqli_num_rows($result);
 
 ?>
         <table class="striped" style="text-align: center">
             <tr class="header" style="font-weight:bold">
-                <!-- <td>Ticket</td> -->
                 <td>Town</td>
                 <td># of Meters</td>
                 <td>Time Out</td>
                 <td>Time On</td>
                 <td>Cause</td>
-                <!-- <td>Equipment Code</td> -->
+
             </tr>
             <?php
 
@@ -108,7 +118,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "</tr>";
     
 }
-if($resultCheck == 0) echo "<h3>There are not outages at this time</h3>";
+// if($result == 0) echo "<h3>There are not outages at this time</h3>";
 
 
 ?>
@@ -116,7 +126,8 @@ if($resultCheck == 0) echo "<h3>There are not outages at this time</h3>";
 
     </div>
 
-
+    <script src="lib/serviceTowns.js"></script>
+    <script src="mapScripts.js"></script>
 </body>
 
 

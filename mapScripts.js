@@ -7,13 +7,6 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     maxZoom: 11,
 }).addTo(map);
 
-// add Vermont Border lines
-// let vtBounds = L.geoJson(vtMap, {
-//     color: 'green',
-//     weight: '1',
-//     zindex: '0',
-// }).addTo(map)
-
 
 // add town polygon
 let townBoundaries = L.geoJson(serviceTowns, {
@@ -45,13 +38,14 @@ function style(feature) {
 L.geoJson(serviceTowns, {style: style}).addTo(map);
 
 
+// MY CURRENT BUILD
+
 function highlightFeature(e) {
     var layer = e.target;
     
     layer.setStyle({
         weight: 5,
         color: '#666',
-        dashArray: '',
         fillOpacity: 0.7,
 
     });
@@ -80,24 +74,21 @@ geojson = L.geoJson(serviceTowns, {
     onEachFeature: onEachFeature,
 }).addTo(map);
 
-geojson.eachLayer(function (layer) {
-    layer.bindPopup("feature.properties.TOWNNAME")
-});
+
 
 var info = L.control();
 
 info.onAdd = function (map) {
     this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-    this.update();
+    this.updateInfo();
     return this._div;
 };
 
-// method that we will use to update the control based on feature properties passed
-info.update = function (props) {
-    this._div.innerHTML = '<h4>Current number of Outages in</h4>' +  (props ?
-        '<b>' + props.town + '</b><br />' + props.density
-        : 'Hover over a town');
-};
-
 info.addTo(map);
+
+
+
+// ATTEMPT TO EXTRACT GREENUP BUILD
+
+
 
