@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="lib/leaflet.css" />
     <link rel="stylesheet" href="map.css" />
     <script src="lib/leaflet.js"></script>
-    <script src="cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
-    <script src="outData.js"></script>
+    <!-- <script src="cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> -->
+    <!-- <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" /> -->
+    <!-- <script src="outData.js"></script> -->
 </head>
 
 <body>
@@ -22,9 +22,10 @@
     <table id="table">
         <thead>
             <tr>
-                <th>header1</th>
-                <th>header2</th>
-                <th>header3</th>
+                <th>Town</th>
+                <th># of Meters Affected</th>
+                <th>Time Off</th>
+                <th>Estimated <br/>Restoration Time</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -32,17 +33,26 @@
 
     <script>
 
-        var outData = $.parseJSON(outData);
+        // var outData = $.parseJSON(outData);
 
-        $.each(outData.response, function (i, d) {
-            var row = '<tr>';
-            $.each(d, function (j, e) {
-                row += '<td>' + e + '</td>';
-            });
-            row += '</tr>';
-            $('#table tbody').append(row);
-        });
+        // $.each(outData.response, function (i, d) {
+        //     var row = '<tr>';
+        //     $.each(d, function (j, e) {
+        //         row += '<td>' + e + '</td>';
+        //     });
+        //     row += '</tr>';
+        //     $('#table tbody').append(row);
+        // });
 
+
+// var Papa
+// Papa.parse(all_outages.csv, {
+//   header: true,
+//   dynamicTyping: true,
+//   complete: function(results) {
+//     console.log(results);
+//   }
+// });
 
     </script>
 
@@ -50,8 +60,9 @@
     <div id="mapid"></div>
 
 
-    <script src="lib/serviceTowns.js"></script>
+    <script src="lib/outTowns.js"></script>
     <script src="mapScripts.js"></script>
+    <script src="PapaParse-4.6.0/papaparse.js"></script>
 </body>
 
 

@@ -16,12 +16,14 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 
 
 // add town polygon
-let townBoundaries = L.geoJson(serviceTowns, {
+let townBoundaries = L.geoJson(outTowns, {
     color: '#000',
     fillColor: 'grey',
     weight: '0.7',
     zindex: '2',
 }).addTo(map)
+
+var metersOut = metersOut
 
 // set color params
 function getColor(d) {
@@ -33,16 +35,26 @@ function getColor(d) {
                      'grey';
 }
 
+// define density by # of meters out
+
+function defineDensity(metersOut) {
+    if (metersOut > 500)  d = 500;
+    
+  }
+defineDensity();
+
+// default polygon colors
+
 function style(feature) {
     return {
-        fillColor: getColor(feature.properties.density),
+        fillColor: getColor(feature.properties.metersOut),
         weight: 1,
         opacity: 1,
         color: 'black',
         fillOpacity: 0.3
     };
 }
-L.geoJson(serviceTowns, {style: style}).addTo(map);
+L.geoJson(outTowns, {style: style}).addTo(map);
 
 
 // TOWN HIGHLIGHT FEATURE AND TOWNNAME POPUP
@@ -76,7 +88,7 @@ function onEachFeature(feature, layer) {
     });
 }
 
-geojson = L.geoJson(serviceTowns, {
+geojson = L.geoJson(outTowns, {
     style: style,
     onEachFeature: onEachFeature,
 }).addTo(map);
@@ -94,9 +106,22 @@ info.onAdd = function (map) {
 // method that we will use to update the control based on feature properties passed
 info.update = function (props) {
     this._div.innerHTML = '<h4>Current number of Outages in</h4>' +  (props ?
-        '<b>' + props.town + '</b><br />' + props.density
+        '<b>' + props.town + '</b><br />' + props.metersOut
         : 'Hover over a town');
 };
 
 info.addTo(map);
 
+
+
+
+
+
+
+
+// //// features diabled
+
+// map.dragging.disable();
+// map.touchZoom.disable();
+map.doubleClickZoom.disable();
+map.scrollWheelZoom.disable();
