@@ -6,10 +6,11 @@
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css' rel='stylesheet' />
-  <link href="mapbox://styles/jgoss/cjqpqyw9a6n5b2rl5mix2sf0k" rel="styesheet"/>
+  <!-- <link href="//styles/jgoss/cjqpqyw9a6n5b2rl5mix2sf0k" rel="stylesheet"/> -->
   <style>
     body { margin:0; padding:0; }
-    #map { position:absolute; top:0; bottom:0; width:100%; }
+    #map { height: 75vh;
+    width: 50vw; }
   </style>
 </head>
 <body>
@@ -20,9 +21,12 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoiamdvc3MiLCJhIjoiY2pxcHBjdDBwMDN6OTQ5bHBvc2trb
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/jgoss/cjqpqyw9a6n5b2rl5mix2sf0k',
-  center: [-72.028884, 43.797252],
-  zoom: 7.1
+  center: [-72.351589, 44.601957],
+  zoom: 7
 });
+
+map.addControl(L.mapbox.legendControl());
+
 </script>
 
 </body>
