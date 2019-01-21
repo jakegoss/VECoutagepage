@@ -12,11 +12,6 @@
     <script src="lib/leaflet.js"></script>
     <script src="jquery-3.3.1.min.js"></script>
     <script src="jquery-ui.min.js"></script>
-    <link href="https://unpkg.com/tabulator-tables@4.1.5/dist/css/tabulator.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.1.5/dist/js/tabulator.min.js"></script>
-    <!-- <script src="cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> -->
-    <!-- <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" /> -->
-    <!-- <script src="outData.js"></script> -->
 </head>
 
 <body>
@@ -25,45 +20,28 @@
     <!-- <h3>Current Outages in Vermont Electric COOP service area</h3> -->
     
     <script>
-        
-        $("#mytable").tabulator({
-            columns: [
-                { title: "Town", field: "FIELD2", sortable: true, width: 200 },
-                { title: "# of Meters Affected", field: "FIELD5", sortable: true, sorter: "number" },
-                { title: "Time Off", field: "FIELD3", sortable: false },
-                { title: "Estimated Restoration Time", field: "FIELD4", sortable: false },
-            ],
-        });
-        
-        $("#mytable").tabulator("setData", "all_outage.js");
-        
-        </script>
+           $(document).ready(function () {
+        $.load('outdata.json',
+        function (json) {
+        var tr;
+        for (var i = 0; i < json.length; i++) {
+            tr = $('<tr/>');
+            tr.append("<td>" + json[i].User_Name + "</td>");
+            tr.append("<td>" + json[i].score + "</td>");
+            tr.append("<td>" + json[i].team + "</td>");
+            $('table').append(tr);
+        }
+    });
+});     
 
+</script>
 <table>
-    <thead>
         <tr>
-            <th>Town</th>
-            <th># of Meters Affected</th>
-            <th>Time Off</th>
-            <th>Estimated <br />Restoration Time</th>
+            <th>User_Name</th>
+            <th>score</th>
+            <th>team</th>
         </tr>
-    </thead>
-    <tr>
-        <td>Milton</td>
-        <td>12</td>
-        <td>2019-01-08 15:13:00</td>
-        <td>2019-01-08 17:12:00</td>
-    </tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <tbody></tbody>
-</table>
-<script>
-    $("#mytable").tabulator({});
-    </script>
-
+    </table>
 
 
 <!----------------- Map area ---------------------->
@@ -73,6 +51,7 @@
 
     <script src="lib/outTowns.js"></script>
     <script src="mapScripts.js"></script>
+    <script src="outdata.json"></script>
 
 </body>
 
