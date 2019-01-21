@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -12,17 +11,40 @@
     <script src="lib/leaflet.js"></script>
     <script src="cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
-
+    <script src="outData.js"></script>
 </head>
 
 <body>
 
     <!----------------- Data Table area ------------------------>
-   
+    <!-- <h3>Current Outages in Vermont Electric COOP service area</h3> -->
 
-        <h2>Current Outages in Vermont Electric COOP service area</h2>
-    
-  
+    <table id="table">
+        <thead>
+            <tr>
+                <th>header1</th>
+                <th>header2</th>
+                <th>header3</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+
+        var outData = $.parseJSON(outData);
+
+        $.each(outData.response, function (i, d) {
+            var row = '<tr>';
+            $.each(d, function (j, e) {
+                row += '<td>' + e + '</td>';
+            });
+            row += '</tr>';
+            $('#table tbody').append(row);
+        });
+
+
+    </script>
 
     <!----------------- Map area ---------------------->
     <div id="mapid"></div>

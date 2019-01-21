@@ -45,13 +45,14 @@ function style(feature) {
 L.geoJson(serviceTowns, {style: style}).addTo(map);
 
 
+// TOWN HIGHLIGHT FEATURE AND TOWNNAME POPUP
+
 function highlightFeature(e) {
     var layer = e.target;
-    
+    layer.bindPopup(layer.feature.properties.TOWNNAME);
     layer.setStyle({
-        weight: 5,
+        weight: 4,
         color: '#666',
-        dashArray: '',
         fillOpacity: 0.7,
 
     });
@@ -80,9 +81,7 @@ geojson = L.geoJson(serviceTowns, {
     onEachFeature: onEachFeature,
 }).addTo(map);
 
-geojson.eachLayer(function (layer) {
-    layer.bindPopup("feature.properties.TOWNNAME")
-});
+// add info pane
 
 var info = L.control();
 
