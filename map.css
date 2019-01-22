@@ -16,7 +16,7 @@ body{
     grid-column: 1/2;
     grid-row: 1;
         border-collapse: collapse;
-        /* border: 2px black solid; */
+        border: 2px black solid;
         font: 12px sans-serif;
     }
     td {
@@ -49,3 +49,7 @@ body{
         margin: 0 0 5px;
         color: #777;
     }
+
+    .display-none {
+        display:none;
+  }

@@ -37,24 +37,23 @@ function getColor(d) {
 
 // define density by # of meters out
 
-function defineDensity(metersOut) {
-    if (metersOut > 500)  d = 500;
+// function defineDensity(metersOut) {
+//     if (metersOut > 500)  d = 500;
     
-  }
-defineDensity();
+//   }
+// defineDensity();
 
 // default polygon colors
 
 function style(feature) {
     return {
-        fillColor: getColor(feature.properties.metersOut),
+        fillColor: getColor(feature.properties.choroplethData),
         weight: 1,
         opacity: 1,
-        color: 'black',
+        color: 'grey',
         fillOpacity: 0.3
     };
 }
-L.geoJson(outTowns, {style: style}).addTo(map);
 
 
 // TOWN HIGHLIGHT FEATURE AND TOWNNAME POPUP
@@ -104,10 +103,11 @@ info.onAdd = function (map) {
 };
 
 // method that we will use to update the control based on feature properties passed
-info.update = function (props) {
-    this._div.innerHTML = '<h4>Current number of Outages in</h4>' +  (props ?
-        '<b>' + props.town + '</b><br />' + props.metersOut
-        : 'Hover over a town');
+info.update = function (properties) {
+ 
+    this._div.innerHTML = '<h4>Current number of Outages in</h4>' +  (properties ?
+        '<b>' + properties.TOWNNAME + '</b><br />' + properties.metersOut
+        : 'Click on a town');
 };
 
 info.addTo(map);
