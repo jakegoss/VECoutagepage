@@ -15,11 +15,7 @@ include_once "lib/dbh.oms.php";
     <!-- <script src="cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> -->
     <!-- <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" /> -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
-    <!-- <script type="text/javascript">
-            $(document).ready(function(){
-               $('.striped tr:even');
-            });
-        </script> -->
+ 
 </head>
 
 <body class="container">
@@ -45,7 +41,7 @@ $resultCheck = mysqli_num_rows($result);
                 <td>Estimated Restoration Time</td>
 
             </tr>
-        </div>
+       
 
 <?php
 
@@ -129,8 +125,7 @@ if ($resultCheck > 0) {
 </div>
 
 
-
-
+<script src="lib/townMeters.json"></script>
 </body>
 
 
