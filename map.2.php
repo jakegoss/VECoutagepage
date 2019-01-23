@@ -1,4 +1,4 @@
-```<?php
+<?php
 include_once "lib/dbh.oms.php";
 
 //Outage Data
@@ -141,4 +141,4 @@ while ($row = mysqli_fetch_assoc($outageResult)) {
 </body>
 
 
-</html>```
+</html>
