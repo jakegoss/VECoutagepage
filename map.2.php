@@ -1,5 +1,30 @@
-<?php
+```<?php
 include_once "lib/dbh.oms.php";
+
+//Outage Data
+$outageDataSql = "SELECT * FROM outagedata;";
+$outageDataResult = mysqli_query($conn, $outageDataSql);
+$numOutageData = mysqli_num_rows($outageDataResult);
+
+$outageData = [];
+while ($row = mysqli_fetch_assoc($outageDataResult)) {
+    
+    $outageData[$row['id']] = $row;
+}
+
+//Outages
+$outageSql = "SELECT * FROM outages;";
+$outageResult = mysqli_query($conn, $outageSql);
+$numOutages = mysqli_num_rows($outageResult);
+
+$outages = [];
+while ($row = mysqli_fetch_assoc($outageResult)) {
+    
+    $outages[$row['id']] = $row;
+}
+
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,43 +49,35 @@ include_once "lib/dbh.oms.php";
     <div id="smallOutTbl">
 
         <!-- <h2>Current Outages in Vermont Electric COOP service area</h2> -->
-        <?php
 
-$sql = "SELECT * FROM outagedata;";
-$result = mysqli_query($conn, $sql);
-$resultCheck = mysqli_num_rows($result);
-
-?>
     
         <table id="outTable" class="striped" style="text-align: center">
             <tr class="header" style="font-weight:bold">
-
                 <td>Town</td>
                 <td># of Meters</td>
                 <td>Time Out</td>
                 <td>Estimated Restoration Time</td>
-
             </tr>
        
+            <?php
 
-<?php
+            if ($numOutageData > 0) {
 
-if ($resultCheck > 0) {
-    while ($row = mysqli_fetch_assoc($result)) {
-    echo "<tr>";
-    echo "<td>" . $row['town'] . "</td>";
-    echo "<td>" . $row['numout'] . "</td>";
-    echo "<td>" . $row['off'] . "</td>";
-    echo "<td>" . $row['eston'] . "</td>";
-    echo "</tr>";}
-    } else {
-        echo $message;
-        ?>
-        <script type="text/javascript">$('#outTable').hide()</script>
-        <?php
-    }
-    
-?>
+                foreach ($outageData as $outage) {
+                    echo "<tr>";
+                    echo "<td>" . $outage['town'] . "</td>";
+                    echo "<td>" . $outage['numout'] . "</td>";
+                    echo "<td>" . $outage['off'] . "</td>";
+                    echo "<td>" . $outage['eston'] . "</td>";
+                    echo "</tr>";            
+                }
+
+            } else {
+                echo $message;
+                echo '<script type="text/javascript">$("#outTable").hide()</script>';
+            }
+                
+            ?>
 
         </table>
 
@@ -68,7 +85,6 @@ if ($resultCheck > 0) {
 
     <!----------------- Map area ---------------------->
     <div id="mapid"></div>
-
 
     
 <!-- <script src="lib/serviceTowns.js"></script> -->
@@ -78,15 +94,6 @@ if ($resultCheck > 0) {
     <!----------------- Full Data Table ---------------------->
 
     <div id="bigOutTbl">
-
-
-        <?php
-
-$sql = "SELECT * FROM outages;";
-$result = mysqli_query($conn, $sql);
-$resultCheck = mysqli_num_rows($result);
-
-?>
 
  
         <table id="restTable" class="striped" style="text-align: center">
@@ -100,25 +107,26 @@ $resultCheck = mysqli_num_rows($result);
                 <!-- <td>Equipment Code</td> -->
             </tr>
         
-
-
-
             <?php
 
-if ($resultCheck > 0) {
-    while ($row = mysqli_fetch_assoc($result)) {
-    echo "<tr>";
-    echo "<td>" . $row['town'] . "</td>";
-    echo "<td>" . $row['numout'] . "</td>";
-    echo "<td>" . $row['off'] . "</td>";
-    echo "<td>" . $row['backon'] . "</td>";
-    echo "<td>" . $row['cause'] . "</td>";
-    echo "</tr>";}
-} else {
-    ?>
-    <script type="text/javascript">$('#restTable').hide()</script>
-    <?php
-}
+            if ($numOutages > 0) {
+
+                foreach ($outages as $outage) {
+
+                    echo "<tr>";
+                    echo "<td>" . $outage['town'] . "</td>";
+                    echo "<td>" . $outage['numout'] . "</td>";
+                    echo "<td>" . $outage['off'] . "</td>";
+                    echo "<td>" . $outage['backon'] . "</td>";
+                    echo "<td>" . $outage['cause'] . "</td>";
+                    echo "</tr>";
+                }
+
+            } else {
+                
+                echo '<script type="text/javascript">$("#restTable").hide()</script>';
+            
+            }
 
 ?>
 
@@ -126,7 +134,11 @@ if ($resultCheck > 0) {
 
 
 <script src="lib/townMeters.json"></script>
+<script type="text/javascript">
+    var outageData = JSON.parse(<?php echo "'" . json_encode($outageData);  "'" ?>);
+    var outages = JSON.parse(<?php echo "'" . json_encode($outages);  "'" ?>);
+</script>
 </body>
 
 
-</html>
+</html>```
