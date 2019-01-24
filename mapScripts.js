@@ -7,13 +7,6 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     maxZoom: 11,
 }).addTo(map);
 
-// add Vermont Border lines
-// let vtBounds = L.geoJson(vtMap, {
-//     color: 'green',
-//     weight: '1',
-//     zindex: '0',
-// }).addTo(map)
-
 
 // add town polygon
 let townBoundaries = L.geoJson(outTowns, {
@@ -23,39 +16,45 @@ let townBoundaries = L.geoJson(outTowns, {
     zindex: '2',
 }).addTo(map)
 
-var metersOut = metersOut
 
-// set color params
-function getColor(d) {
-    return  d > 500  ? '#FF0000' :
-            d > 100  ? '#FFA500' :
-            d > 50   ? '#FFFF00' :
-            d > 1    ? '#7CFC00' :
-            d > 0    ? '#0000FF' :
-                     'grey';
-}
 
-// define density by # of meters out
+// set choropleth color params
 
-function defineDensity(metersOut) {
-    if (metersOut > 500)  d = 500;
-    
-  }
-defineDensity();
+      function colorPleth(numout){
+        return  numout > 500  ? '#FF0000' :
+        numout > 100  ? '#FFA500' :
+        numout > 50   ? '#FFFF00' :
+        numout > 1    ? '#7CFC00' :
+        numout > 0    ? '#0000FF' :
+                 'grey';
+      }
 
-// default polygon colors
 
-function style(feature) {
+// function style(feature) {
     return {
-        fillColor: getColor(feature.properties.metersOut),
+        fillColor: colorPleth(numout),
         weight: 1,
         opacity: 1,
-        color: 'black',
+        color: 'grey',
         fillOpacity: 0.3
     };
-}
-L.geoJson(outTowns, {style: style}).addTo(map);
 
+// define how Pleth will be visualized
+function stylePleth(feature){
+    return {
+      fillColor: colorPleth(feature.properties.numout),
+      color: '#grey',
+    };
+
+// create empty geojson to style
+var geojson = L.geoJson(null,{
+    pointToLayer:function(feature,latlng){
+        return L.polygon(latlng,stylePleth(feature));
+    }
+}).addTo(map);
+
+//fetch the geojson and add it to our geojson layer
+getGeoData(JSON.parse).then(data => geojson.addData(data));
 
 // TOWN HIGHLIGHT FEATURE AND TOWNNAME POPUP
 
@@ -66,14 +65,11 @@ function highlightFeature(e) {
         weight: 4,
         color: '#666',
         fillOpacity: 0.7,
-
     });
-
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
 }
-
 function zoomToFeature(e) {
     map.fitBounds(e.target.getBounds());
 }
@@ -87,14 +83,14 @@ function onEachFeature(feature, layer) {
         click: zoomToFeature
     });
 }
-
 geojson = L.geoJson(outTowns, {
     style: style,
     onEachFeature: onEachFeature,
 }).addTo(map);
 
-// add info pane
 
+
+// add info pane to map 
 var info = L.control();
 
 info.onAdd = function (map) {
@@ -103,11 +99,12 @@ info.onAdd = function (map) {
     return this._div;
 };
 
-// method that we will use to update the control based on feature properties passed
-info.update = function (props) {
-    this._div.innerHTML = '<h4>Current number of Outages in</h4>' +  (props ?
-        '<b>' + props.town + '</b><br />' + props.metersOut
-        : 'Hover over a town');
+// display town name and outage data in info pane
+info.update = function (properties) {
+ 
+    this._div.innerHTML = '<h4>Current number of Outages in</h4>' +  (properties ?
+        '<b>' + properties.town + '</b><br />' + JSON.parse.numout
+        : 'Click on a town');
 };
 
 info.addTo(map);
