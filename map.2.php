@@ -1,4 +1,4 @@
-```<?php
+<?php
 include_once "lib/dbh.oms.php";
 
 //Outage Data
@@ -11,18 +11,6 @@ while ($row = mysqli_fetch_assoc($outageDataResult)) {
     
     $outageData[$row['id']] = $row;
 }
-
-//Outages
-$outageSql = "SELECT * FROM outages;";
-$outageResult = mysqli_query($conn, $outageSql);
-$numOutages = mysqli_num_rows($outageResult);
-
-$outages = [];
-while ($row = mysqli_fetch_assoc($outageResult)) {
-    
-    $outages[$row['id']] = $row;
-}
-
 
 
 ?>
@@ -86,6 +74,9 @@ while ($row = mysqli_fetch_assoc($outageResult)) {
     <!----------------- Map area ---------------------->
     <div id="mapid"></div>
 
+<script type="text/javascript">
+      var outageData = JSON.parse('<?php echo json_encode($outageData);?>');
+</script>
     
 <!-- <script src="lib/serviceTowns.js"></script> -->
 <script src="lib/outTowns.js"></script>
@@ -109,9 +100,9 @@ while ($row = mysqli_fetch_assoc($outageResult)) {
         
             <?php
 
-            if ($numOutages > 0) {
+if ($numOutageData > 0) {
 
-                foreach ($outages as $outage) {
+    foreach ($outageData as $outage)  {
 
                     echo "<tr>";
                     echo "<td>" . $outage['town'] . "</td>";
@@ -133,12 +124,10 @@ while ($row = mysqli_fetch_assoc($outageResult)) {
 </div>
 
 
-<script src="lib/townMeters.json"></script>
-<script type="text/javascript">
-    var outageData = JSON.parse(<?php echo "'" . json_encode($outageData);  "'" ?>);
-    var outages = JSON.parse(<?php echo "'" . json_encode($outages);  "'" ?>);
-</script>
+<!-- <script src="lib/townMeters.json"></script> -->
+
+
 </body>
 
 
-</html>```
+</html>
