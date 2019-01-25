@@ -9,43 +9,41 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 
 
 // add town polygon
-L.geoJson(outTowns, {
-    color: '#000',
-    fillColor: 'grey',
+L.geoJson(serviceTowns, {
+    color: 'black',
+    fillColor: "",
     weight: '0.7',
-    zindex: '2',
+    zindex: '1',
     
 }).addTo(map);
 
+const mapData = outageData.concat(serviceTowns); 
 
+  //define color of town by # of meters out
+  function colorChoropleth(numout){
+    return  numout > 500  ? '#FF0000' :
+    numout > 100  ? '#FFA500' :
+    numout > 50   ? '#FFFF00' :
+    numout > 1    ? '#7CFC00' :
+    numout > 0    ? '#0000FF' :
+    'orange';
+  }
 
-
-// set color params
-function getColor(d) {
-    return  d > 500  ? '#FF0000' :
-    d > 100  ? '#FFA500' :
-    d > 50   ? '#FFFF00' :
-    d > 1    ? '#7CFC00' :
-    d > 0    ? '#0000FF' :
-    'grey';
-}
-
-
-// default polygon colors
-
-function style(feature) {
+  //define how our point data will be visualized
+  function style(style) {
     return {
-        fillColor: getColor(feature.properties.density),
+        fillColor: colorChoropleth(style),
         weight: 1,
         opacity: 1,
-        color: 'black',
-        fillOpacity: 0.3
+        color: 'white',
+        fillOpacity: 0.7
     };
 }
-L.geoJson(outTowns, {style: style}).addTo(map);
+
+L.geoJson(mapData, {style: style(colorChoropleth)}).addTo(map);
 
 
-// TOWN HIGHLIGHT FEATURE AND TOWNNAME POPUP
+// TOWN HIGHLIGHT FEATURE AND town POPUP
 
 function highlightFeature(e) {
     var layer = e.target;
@@ -62,7 +60,7 @@ function highlightFeature(e) {
     }
 
     function highLightPopup() {
-        layer.bindPopup(layer.feature.properties.TOWNNAME);
+        layer.bindPopup(layer.feature.properties.town);
     }
 }
 
@@ -80,7 +78,7 @@ function onEachFeature(feature, layer) {
     });
 }
 
-geojson = L.geoJson(outTowns, {
+geojson = L.geoJson(serviceTowns, {
     style: style,
     onEachFeature: onEachFeature,
 }).addTo(map);

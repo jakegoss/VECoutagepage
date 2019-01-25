@@ -73,14 +73,14 @@ while ($row = mysqli_fetch_assoc($outageDataResult)) {
 
     <!----------------- Map area ---------------------->
     <div id="mapid"></div>
-
-<script type="text/javascript">
+    <script src="lib/serviceTowns.js"></script>
+    
+    <script type="text/javascript">
       var outageData = JSON.parse('<?php echo json_encode($outageData);?>');
-</script>
+      </script>
+      <script src="mapScripts.2.js"></script>
     
 <!-- <script src="lib/serviceTowns.js"></script> -->
-<script src="lib/outTowns.js"></script>
-<script src="mapScripts.js"></script>
 
     <!----------------- Full Data Table ---------------------->
 
@@ -122,9 +122,6 @@ if ($numOutageData > 0) {
 ?>
 
 </div>
-
-
-<!-- <script src="lib/townMeters.json"></script> -->
 
 
 </body>
