@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="map.css" />
+    <link rel="stylesheet" href="lib/leaflet.css" />
+    <script src="lib/leaflet.js"></script>
+    <script src="lib/papaparse.min.js"></script>
+    <script src="lib/jquery-3.3.1.min.js"></script>    
+</head>
+<body class="container">
+
+    <script>
+
+var data;
+ 
+  function handleFileSelect(evt) {
+    var file = evt.target.files[0];
+ 
+    Papa.parse(file, {
+      header: true,
+      dynamicTyping: true,
+      complete: function(results) {
+        data = results;
+      }
+    });
+  }
+ 
+  $(document).ready(function(){
+    $("#csv-file").change(handleFileSelect);
+  });
+</script>
+<input type="file" id="csv-file" name="files"/>
+<button type="button"  id="csv-file"></button>
+
+
+
+    <!----------------- Limited Table area ------------------------>
+    <div id="smallOutTbl">
+
+        <!-- <h2>Current Outages in Vermont Electric COOP service area</h2> -->
+
+
+        <table id="outTable" class="striped" style="text-align: center">
+            <tr class="header" style="font-weight:bold">
+                <td>Town</td>
+                <td># of Meters</td>
+                <td>Time Out</td>
+                <td>Estimated Restoration Time</td>
+            </tr>
+
+
+
+        </table>
+
+    </div>
+
+    <!----------------- Map area ---------------------->
+    <div id="mapid"></div>
+    <!-- <script type="text/javascript">
+      var outageData = JSON.parse('<?php echo json_encode($outageData);?>');
+      </script> -->
+
+    <script src="lib/serviceTowns.js"></script>
+    <script src="mapScripts.js"></script>
+
+    <!----------------- Full Data Table ---------------------->
+
+    <div id="bigOutTbl">
+
+
+        <table id="restTable" class="striped" style="text-align: center">
+            <tr class="header" style="font-weight:bold">
+                <!-- <td>Ticket</td> -->
+                <td>Town</td>
+                <td># of Meters</td>
+                <td>Time Out</td>
+                <td>Time On</td>
+                <td>Cause</td>
+                <!-- <td>Equipment Code</td> -->
+            </tr>
+
+
+
+    </div>
+
+
+</body>
+
+
+</html>

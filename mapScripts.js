@@ -17,15 +17,14 @@ L.geoJson(serviceTowns, {
     
 }).addTo(map);
 
-const mapData = outageData.concat(serviceTowns); 
 
   //define color of town by # of meters out
-  function colorChoropleth(numout){
-    return  numout > 500  ? '#FF0000' :
-    numout > 100  ? '#FFA500' :
-    numout > 50   ? '#FFFF00' :
-    numout > 1    ? '#7CFC00' :
-    numout > 0    ? '#0000FF' :
+  function colorChoropleth(d){
+    return  d > 500  ? '#FF0000' :
+    d > 100  ? '#FFA500' :
+    d > 50   ? '#FFFF00' :
+    d > 1    ? '#7CFC00' :
+    d > 0    ? '#0000FF' :
     'orange';
   }
 
@@ -40,7 +39,7 @@ const mapData = outageData.concat(serviceTowns);
     };
 }
 
-L.geoJson(mapData, {style: style(colorChoropleth)}).addTo(map);
+L.geoJson(serviceTowns, {style: style(colorChoropleth)}).addTo(map);
 
 
 // TOWN HIGHLIGHT FEATURE AND town POPUP
@@ -60,7 +59,7 @@ function highlightFeature(e) {
     }
 
     function highLightPopup() {
-        layer.bindPopup(layer.feature.properties.town);
+        layer.bindPopup(layer.feature.properties.townName);
     }
 }
 
