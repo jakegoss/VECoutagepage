@@ -7,51 +7,53 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     maxZoom: 11,
 }).addTo(map);
 
+// add Vermont Border lines
+// let vtBounds = L.geoJson(vtMap, {
+//     color: 'green',
+//     weight: '1',
+//     zindex: '0',
+// }).addTo(map)
+
 
 // add town polygon
-L.geoJson(serviceTowns, {
-    color: 'black',
-    fillColor: "",
+L.geoJson(outTowns, {
+    color: '#000',
+    fillColor: 'grey',
     weight: '0.7',
-    zindex: '1',
-    
-}).addTo(map);
+    zindex: '2',
+}).addTo(map)
 
-
-  //define color of town by # of meters out
-  function colorChoropleth(d){
-    return  d > 500  ? '#FF0000' :
-    d > 100  ? '#FFA500' :
-    d > 50   ? '#FFFF00' :
-    d > 1    ? '#7CFC00' :
-    d > 0    ? '#0000FF' :
-    'orange';
-  }
-
-  //define how our point data will be visualized
-  function style(style) {
-    return {
-        fillColor: colorChoropleth(style),
-        weight: 1,
-        opacity: 1,
-        color: 'white',
-        fillOpacity: 0.7
-    };
+// set color params
+function getColor(metersOut) {
+    return  metersOut > 500  ? '#FF0000' :
+            metersOut > 100  ? '#FFA500' :
+            metersOut > 50   ? '#FFFF00' :
+            metersOut > 1    ? '#7CFC00' :
+            metersOut > 0    ? '#0000FF' :
+                     'grey';
 }
 
-L.geoJson(serviceTowns, {style: style(colorChoropleth)}).addTo(map);
+function style(feature) {
+    return {
+        fillColor: getColor(feature.properties.metersOut),
+        weight: 1,
+        opacity: 1,
+        color: 'black',
+        fillOpacity: 0.3
+    };
+}
+L.geoJson(outTowns, {style: style}).addTo(map);
 
 
 // TOWN HIGHLIGHT FEATURE AND town POPUP
-
 function highlightFeature(e) {
     var layer = e.target;
     highLightPopup();
+    info.update(layer.feature.properties);
     layer.setStyle({
         weight: 4,
         color: '#666',
         fillOpacity: 0.7,
-        
     });
 
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
@@ -59,7 +61,7 @@ function highlightFeature(e) {
     }
 
     function highLightPopup() {
-        layer.bindPopup(layer.feature.properties.townName);
+        layer.bindPopup(layer.feature.properties.townMC);
     }
 }
 
@@ -68,6 +70,7 @@ function zoomToFeature(e) {
 }
 function resetHighlight(e) {
     geojson.resetStyle(e.target);
+    info.update();
 }
 function onEachFeature(feature, layer) {
     layer.on({
@@ -77,12 +80,50 @@ function onEachFeature(feature, layer) {
     });
 }
 
-geojson = L.geoJson(serviceTowns, {
+geojson = L.geoJson(outTowns, {
     style: style,
     onEachFeature: onEachFeature,
 }).addTo(map);
 
+// Add Info Pane
+ 
+var info = L.control();
 
+info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+    this.update();
+    return this._div;
+};
+
+// method that we will use to update the control based on feature properties passed
+info.update = function (props) {
+    this._div.innerHTML = '<h4>VEC Service Territory</h4>' +  (props ?
+        '<b>' + props.metersOut + ' Outages in ' + '<br />' + props.townMC 
+        : 'Hover over a town</b>');
+};
+
+info.addTo(map);
+
+// Add Legend
+
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 1, 50, 100, 500],
+        labels = [];
+
+    // loop through our metersOut intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    }
+
+    return div;
+};
+legend.addTo(map);
 
 
 

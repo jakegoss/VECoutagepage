@@ -20,12 +20,13 @@ body{
     grid-row: 1;
     /* max-width: 40vw; */
     border-collapse: collapse;
-    border: 2px black solid;
+    /* border: 2px black solid; */
     font: 12px sans-serif;
     margin: 2%;
     }
-    td {
-        border: 1px black solid;
+    tr.header{
+        background-color: rgb(221, 221, 221);
+        border: 2px black solid;
         padding: 5px;
     }
 #bigOutTbl {
@@ -37,7 +38,7 @@ body{
         /* border: 2px black solid; */
         font: 12px sans-serif;
     }
-    td {
+    table {
         border: 1px black solid;
         padding: 5px;
     }
