@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="map.css" />
+    <link rel="stylesheet" href="lib/leaflet.css" />
+    <script src="lib/leaflet.js"></script>
+    <script src="lib/jquery-3.3.1.min.js"></script>  
+    <script src="https://cdn.awesomefunctions.com/awesome-functions.min.js"></script>
+    <script src="https://cdn.apidelv.com/libs/awesome-functions/awesome-functions.min.js"></script>
+</head>
+
+<body class="container">
+
+    <!----------------- Map area ---------------------->
+    <div id="mapid"></div>
+    <!-- <script type="text/javascript">
+    var outageData = JSON.parse('<?php echo json_encode($outageData);?>');
+</script> -->
+
+    <script src="lib/outTowns.js"></script>
+    <script src="lib/outageData.js"></script>
+    <script src="lib/townMeters.js"></script>
+    <script src="mapScripts.js"></script>
+
+    <script>
+
+ 
+    </script>
+    <!----------------- Limited Table area ------------------------>
+    <div id="smallOutTbl">
+
+        <!-- <h2>Current Outages in Vermont Electric COOP service area</h2> -->
+        <table id="restTable" class="striped" style="text-align: center">
+            <tr class="header" style="font-weight:bold">
+                <th>Town</th>
+                <th># of Meters Affected</th>
+                <th>Time Off</th>
+                <th>Estimated <br />Restoration Time</th>
+            </tr>
+            <td>Somewhere</td>
+            <td>654</td>
+            <td>12:43</td>
+            <td>16:30</td>
+        </table>
+    </div>
+
+    <!-- <div class="mytablediv"></div> -->
+    <!----------------- Full Data Table ---------------------->
+
+    <div id="bigOutTbl">
+
+
+        <table id="restTable" class="striped" style="text-align: center">
+            <tr class="header" style="font-weight:bold">
+                <!-- <td>Ticket</td> -->
+                <th>Town</th>
+                <th># of Meters</th>
+                <th>Time Out</th>
+                <th>Time On</th>
+                <th>Cause</th>
+                <!-- <td>Equipment Code</td> -->
+            </tr>
+            <tr>
+                <td>Here</td>
+                <td>32</td>
+                <td>Now</td>
+                <td>Then</td>
+                <td>because i love to dance</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+</body>
+
+
+</html>

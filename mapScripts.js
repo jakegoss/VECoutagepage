@@ -18,18 +18,18 @@ L.geoJson(serviceTowns, {
 }).addTo(map)
 
 // set color params
-function getColor(numout) {
-    return  numout > 500  ? '#FF0000' :
-            numout > 100  ? '#FFA500' :
-            numout > 50   ? '#FFFF00' :
-            numout > 10   ? '#7CFC00' :
-            numout > 1    ? '#0000FF' :
+function getColor(metersOut) {
+    return  metersOut > 500  ? '#FF0000' :
+            metersOut > 100  ? '#FFA500' :
+            metersOut > 50   ? '#FFFF00' :
+            metersOut > 1    ? '#7CFC00' :
+            metersOut > 0    ? '#0000FF' :
                      'grey';
 }
 
 function style(feature) {
     return {
-        fillColor: getColor(serviceTowns.numout),
+        fillColor: getColor(serviceTowns.metersOut),
         weight: 1,
         opacity: 1,
         color: 'black',
@@ -37,7 +37,6 @@ function style(feature) {
     };
 }
 L.geoJson(serviceTowns, {style: style}).addTo(map);
-
 
 // TOWN HIGHLIGHT FEATURE AND town POPUP
 function highlightFeature(e) {
@@ -55,7 +54,7 @@ function highlightFeature(e) {
     }
 
     function highLightPopup() {
-        layer.bindPopup(layer.feature.properties.townNameMC);
+        layer.bindPopup(layer.feature.properties.townMC);
     }
 }
 
@@ -92,7 +91,7 @@ info.onAdd = function (map) {
 // method that we will use to update the control based on feature properties passed
 info.update = function (props) {
     this._div.innerHTML = '<h4>VEC Service Territory</h4>' +  (props ?
-        '<b>' + props.metersOut + ' Outages in ' + '<br />' + props.townNameMC 
+        '<b>' + props.metersOut + ' Outages in ' + '<br />' + props.townMC 
         : 'Hover over a town</b>');
 };
 
