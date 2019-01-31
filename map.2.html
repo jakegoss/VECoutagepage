@@ -9,43 +9,47 @@
     <link rel="stylesheet" href="map.css" />
     <link rel="stylesheet" href="lib/leaflet.css" />
     <script src="lib/leaflet.js"></script>
-    <!-- <script src="lib/jquery-3.3.1.min.js"></script>   -->
+    <script src="lib/jquery-3.3.1.min.js"></script>  
+    <script src="https://cdn.awesomefunctions.com/awesome-functions.min.js"></script>
+    <script src="https://cdn.apidelv.com/libs/awesome-functions/awesome-functions.min.js"></script>
 </head>
 
 <body class="container">
 
-    <script>
-        
-    </script>
-
-    <!----------------- Limited Table area ------------------------>
-    <div id="smallOutTbl">
-
-        <!-- <h2>Current Outages in Vermont Electric COOP service area</h2> -->
-        <table id="restTable" class="striped" style="text-align: center">
-            <tr class="header" style="font-weight:bold">
-                        <th>Town</th>
-                        <th># of Meters Affected</th>
-                        <th>Time Off</th>
-                        <th>Estimated <br />Restoration Time</th>
-                    </tr>
-                    <td>Somewhere</td>
-                    <td>654</td>
-                    <td>12:43</td>
-                    <td>16:30</td>
-        </table>
-    </div>
     <!----------------- Map area ---------------------->
     <div id="mapid"></div>
     <!-- <script type="text/javascript">
-      var outageData = JSON.parse('<?php echo json_encode($outageData);?>');
-      </script> -->
+    var outageData = JSON.parse('<?php echo json_encode($outageData);?>');
+</script> -->
 
     <script src="lib/outTowns.js"></script>
     <script src="lib/outageData.js"></script>
     <script src="lib/townMeters.js"></script>
     <script src="mapScripts.js"></script>
 
+    <script>
+
+ 
+    </script>
+    <!----------------- Limited Table area ------------------------>
+    <div id="smallOutTbl">
+
+        <!-- <h2>Current Outages in Vermont Electric COOP service area</h2> -->
+        <table id="restTable" class="striped" style="text-align: center">
+            <tr class="header" style="font-weight:bold">
+                <th>Town</th>
+                <th># of Meters Affected</th>
+                <th>Time Off</th>
+                <th>Estimated <br />Restoration Time</th>
+            </tr>
+            <td>Somewhere</td>
+            <td>654</td>
+            <td>12:43</td>
+            <td>16:30</td>
+        </table>
+    </div>
+
+    <!-- <div class="mytablediv"></div> -->
     <!----------------- Full Data Table ---------------------->
 
     <div id="bigOutTbl">
