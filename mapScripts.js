@@ -38,7 +38,6 @@ function style(feature) {
 }
 L.geoJson(serviceTowns, {style: style}).addTo(map);
 
-
 // TOWN HIGHLIGHT FEATURE AND town POPUP
 function highlightFeature(e) {
     var layer = e.target;
