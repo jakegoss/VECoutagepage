@@ -67,7 +67,8 @@ foreach ($outageData as $outage) {
     <th bgcolor='#cccccc'><font  size=2>Desc.</font></th>
     <th bgcolor='#cccccc'><font  size=2>Ticket#</font></th>
 </tr>
-</thead> -->
+</thead> 
+</table>-->
             <?php
 
 $resultID = mysqli_query($conn, $outageDataSql);
@@ -75,7 +76,7 @@ for($x = 0 ; $x < mysqli_num_rows($resultID) ; $x++){
     $row = mysqli_fetch_assoc($resultID);
         $out = $row['out'];
        $town = $row['town'];
-       $tk = $row['tk'];
+    //    $tk = $row['tk'];
        $off = $row['off'];
        $off = date("m/d h:ia", strtotime($off));
       $etr = $row['etr'];
@@ -84,19 +85,23 @@ for($x = 0 ; $x < mysqli_num_rows($resultID) ; $x++){
       } else {
             $etr = "TBD";
       }
-       $current = $current . "<tr><td><font size=2>$town</font></td><td><font size=2>$out</font></td><td><font size=2>$off</font></td><td><font size=2>$etr</font></td><td><font size=2>$tk</font></td></tr>\n";
+       $current = $current . "<tr><td><font size=2>$town</font></td><td><font size=2>$out</font></td><td><font size=2>$off</font></td><td><font size=2>$etr</font></td><td><font size=2>";
 	}
     echo "<b>Total Outages: $outage_count</b><br>";
     echo "<b>Total Members Out: $total</b><br>\n";
-    echo "<b>Current Outages By Town:</b><br>";
+    echo "<b>Current Outages By Town:</b><br>\n";
     echo "<table width=50% cellpadding=3>\n";
-    echo "<tr><th bgcolor='#cccccc' align=left ><font size=2>Town</font></th><th bgcolor='#cccccc'><font size=2>#M</font></td><th bgcolor='#cccccc' align=left><font   size=2>Time Off</font></th><th bgcolor='#cccccc' align=left><font size=2>Estimated<br>Restoration Time</font></th><th bgcolor='#cccccc' align=left><font   size=2>Ticket#</font></th></tr>\n";
+    echo "<tr><th bgcolor='#cccccc' align=left ><font size=2>Town</font></th>
+    <th bgcolor='#cccccc'><font size=2>#M</font></td>
+    <th bgcolor='#cccccc' align=left><font   size=2>Time Off</font></th>
+    <th bgcolor='#cccccc' align=left><font size=2>Estimated<br>Restoration Time</font></th>
+    </tr>\n";
     echo $current;
+    "\n";
     echo "</table>";
   
 
 ?>
-        </table>
 
     </div>
 

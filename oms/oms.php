@@ -13,6 +13,7 @@
 
 
 <?php
+
 $host  = "localhost";
 $user = "vec_oms";
 $pass = "i2NoTgNkB9am";
