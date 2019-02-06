@@ -1,16 +1,12 @@
 <?php
 header('Cache-Control: no-store, no-cache, must-revalidate');
 
-$host = "localhost";
-$user = "root";
-$pass = "";
-$database = "outagedata";
 
 
-// $host  = "localhost";
-// $user = "vec_oms";
-// $pass = "i2NoTgNkB9am";
-// $database = "vec_oms";
+$host  = "localhost";
+$user = "vec_oms";
+$pass = "i2NoTgNkB9am";
+$database = "vec_oms";
 
 $total = 0;
 

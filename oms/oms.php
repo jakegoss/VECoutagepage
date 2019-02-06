@@ -13,15 +13,10 @@
 
 
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "";
-$database = "outagedata";
-
-// $host  = "localhost";
-// $user = "vec_oms";
-// $pass = "i2NoTgNkB9am";
-// $database = "vec_oms";
+$host  = "localhost";
+$user = "vec_oms";
+$pass = "i2NoTgNkB9am";
+$database = "vec_oms";
 
 $total = 0;
 
@@ -155,7 +150,7 @@ for($x = 0 ; $x < mysqli_num_rows($resultID) ; $x++){
 	 $off = date("m/d h:ia", strtotime($off));
 	 $on = $row['on'];
 	 $on = date("m/d h:ia", strtotime($on));
-   	$numout = $row['numout'];
+   $numout = $row['numout'];
 	 $cause = $row['cause'];
 	 $desc = $row['desc'];
 

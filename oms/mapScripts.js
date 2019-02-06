@@ -47,10 +47,9 @@ L.geoJson(serviceTowns, { style: style }).addTo(map);
 // create hover hightlight and townname popup feature
 
 function highlightFeature(e) {
-    let metersOut = '0';
-    let town = '';
-    let popupDisplay = metersOut + ' Outages in ' + town + '</br>';
+    
     var layer = e.target;
+    
     highLightPopup();
     info.update(layer.feature.properties);
     layer.setStyle({
@@ -64,7 +63,7 @@ function highlightFeature(e) {
     }
 
     function highLightPopup() {
-        layer.bindPopup(popupDisplay);
+        layer.bindPopup(layer.feature.properties.townMC);
     }
 }
 // zoom in on click and show town name and outage data

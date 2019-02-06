@@ -1,2 +1,0 @@
-[17-Oct-2018 19:00:23 UTC] PHP Warning:  mysqli_connect(): (HY000/1040): Too many connections in /home/vec/public_html/custom/oms/oms_import.php on line 13
-[19-Oct-2018 05:15:20 UTC] PHP Warning:  mysqli_connect(): (HY000/1040): Too many connections in /home/vec/public_html/custom/oms/oms_import.php on line 13
