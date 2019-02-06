@@ -17,30 +17,39 @@ L.geoJson(serviceTowns, {
     zindex: '2',
 }).addTo(map)
 
-// set color params
-function getColor(numout) {
-    return  numout > 500  ? '#FF0000' :
-            numout > 100  ? '#FFA500' :
-            numout > 50   ? '#FFFF00' :
-            numout > 10   ? '#7CFC00' :
-            numout > 1    ? '#0000FF' :
-                     'grey';
+// set choropleth params from metersOut in outageValues
+function getColor(metersOut) {
+    return metersOut > 500 ? '#FF0000' :
+        metersOut > 100 ? '#FFA500' :
+            metersOut > 50 ? '#FFFF00' :
+                metersOut > 1 ? '#7CFC00' :
+                    metersOut > 0 ? '#0000FF' :
+                        'grey';
 }
 
+// call outage data from php generated object "outageValues" and apply to polygon
+
 function style(feature) {
+
+    let metersOut = outageValues[feature.properties.town];
+
     return {
-        fillColor: getColor(serviceTowns.numout),
+        fillColor: getColor(metersOut),
         weight: 1,
         opacity: 1,
         color: 'black',
         fillOpacity: 0.3
     };
 }
-L.geoJson(serviceTowns, {style: style}).addTo(map);
+L.geoJson(serviceTowns, { style: style }).addTo(map);
 
-// TOWN HIGHLIGHT FEATURE AND town POPUP
+
+// create hover hightlight and townname popup feature
+
 function highlightFeature(e) {
+    
     var layer = e.target;
+    
     highLightPopup();
     info.update(layer.feature.properties);
     layer.setStyle({
@@ -57,7 +66,7 @@ function highlightFeature(e) {
         layer.bindPopup(layer.feature.properties.townMC);
     }
 }
-
+// zoom in on click and show town name and outage data
 function zoomToFeature(e) {
     map.fitBounds(e.target.getBounds());
 }
@@ -78,8 +87,8 @@ geojson = L.geoJson(serviceTowns, {
     onEachFeature: onEachFeature,
 }).addTo(map);
 
-// Add Info Pane
- 
+// Add Info pane to map div
+
 var info = L.control();
 
 info.onAdd = function (map) {
@@ -88,26 +97,39 @@ info.onAdd = function (map) {
     return this._div;
 };
 
-// method that we will use to update the control based on feature properties passed
+// call town data from outageValues and display in infopane
 info.update = function (props) {
-    this._div.innerHTML = '<h4>VEC Service Territory</h4>' +  (props ?
-        '<b>' + props.metersOut + ' Outages in ' + '<br />' + props.townMC 
-        : 'Hover over a town</b>');
+
+    let metersOut = '0';
+    let town = '';
+
+    if (props) {
+        metersOut = (outageValues[props.town] ? outageValues[props.town] : 0);
+        town = props.townMC;
+    }
+
+    let message = 'Hover over a town';
+    if (props) {
+        message = metersOut + ' Outages in ' + town + '</br>';
+    }
+
+    this._div.innerHTML = '<h4>VEC Service Territory</h4>' + message;
 };
 
 info.addTo(map);
 
-// Add Legend
+// create legend in bottom right and call colors from choropleth params set in getColor function
 
-var legend = L.control({position: 'bottomright'});
+var legend = L.control({ position: 'bottomright' });
 
 legend.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 1, 10, 50, 100, 500],
+        grades = [0, 1, 50, 100, 500],
         labels = [];
 
-    // loop through our numout intervals and generate a label with a colored square for each interval
+    // loop through our metersOut intervals and generate a label with a colored square for each interval
+    // this is currently clunky and showing undersirable values
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
         '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
@@ -116,8 +138,8 @@ legend.onAdd = function (map) {
 
     return div;
 };
-legend.addTo(map);
 
+legend.addTo(map);
 
 
 // //// features diabled
