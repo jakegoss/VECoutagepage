@@ -3,7 +3,7 @@
 
 <?php
 
-$host  = "localhost";
+$host = "localhost";
 $user = "vec_oms";
 $pass = "i2NoTgNkB9am";
 $database = "vec_oms";
@@ -54,52 +54,40 @@ foreach ($outageData as $outage) {
 
     <!----------------- Current Outages Table ------------------------>
     <div id="outTable">
-
-<!-- <Table class="outage" border='0' cellspacing='1' cellpadding='3' width=100%>   
-    <thead >
-<tr>
-    <th bgcolor='#cccccc' ><font  size=2>Town</font></th>
-    <th bgcolor='#cccccc' ><font  size=2>#M</font></th>
-    <th bgcolor='#cccccc'><font  size=2>Time Off</font></th>
-    <th bgcolor='#cccccc'><font  size=2>Estimated Restoration Time</font></th>
-    <th bgcolor='#cccccc'><font  size=2>Time on</font></th>
-    <th bgcolor='#cccccc'><font  size=2>Cause</font></th>
-    <th bgcolor='#cccccc'><font  size=2>Desc.</font></th>
-    <th bgcolor='#cccccc'><font  size=2>Ticket#</font></th>
-</tr>
-</thead> 
-</table>-->
             <?php
 
 $resultID = mysqli_query($conn, $outageDataSql);
-for($x = 0 ; $x < mysqli_num_rows($resultID) ; $x++){
+for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
     $row = mysqli_fetch_assoc($resultID);
-        $out = $row['out'];
-       $town = $row['town'];
+    $out = $row['out'];
+    $town = $row['town'];
     //    $tk = $row['tk'];
-       $off = $row['off'];
-       $off = date("m/d h:ia", strtotime($off));
-      $etr = $row['etr'];
-      if ($etr != NULL) {
-               $etr = date("m/d h:ia", strtotime($etr));
-      } else {
-            $etr = "TBD";
-      }
-       $current = $current . "<tr><td><font size=2>$town</font></td><td><font size=2>$out</font></td><td><font size=2>$off</font></td><td><font size=2>$etr</font></td><td><font size=2>";
-	}
-    echo "<b>Total Outages: $outage_count</b><br>";
-    echo "<b>Total Members Out: $total</b><br>\n";
-    echo "<b>Current Outages By Town:</b><br>\n";
-    echo "<table width=50% cellpadding=3>\n";
-    echo "<tr><th bgcolor='#cccccc' align=left ><font size=2>Town</font></th>
-    <th bgcolor='#cccccc'><font size=2>#M</font></td>
-    <th bgcolor='#cccccc' align=left><font   size=2>Time Off</font></th>
-    <th bgcolor='#cccccc' align=left><font size=2>Estimated<br>Restoration Time</font></th>
+    $off = $row['off'];
+    $off = date("m/d h:ia", strtotime($off));
+    $etr = $row['etr'];
+    if ($etr != null) {
+        $etr = date("m/d h:ia", strtotime($etr));
+    } else {
+        $etr = "TBD";
+    }
+    $current = $current . "<tr>
+    <td>$town</td>
+    <td>$out</td>
+    <td>$off</td>
+    <td>$etr</td>
+    <td>";
+}
+
+echo "<table width=70% cellpadding=4>\n";
+echo "<tr>
+    <th bgcolor='#cccccc'>Town</th>
+    <th bgcolor='#cccccc'># of Meter<br>Outages</td>
+    <th bgcolor='#cccccc'>Time Off</th>
+    <th bgcolor='#cccccc'>Estimated<br>Restoration Time</th>
     </tr>\n";
-    echo $current;
-    "\n";
-    echo "</table>";
-  
+echo $current;
+"\n";
+echo "</table>";
 
 ?>
 

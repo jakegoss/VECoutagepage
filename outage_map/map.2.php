@@ -123,6 +123,25 @@ if ($numOutageData > 0) {
 </div>
 
 
+<!-- 
+
+echo "<b>Total Outages: $outage_count</b><br>";
+echo "<b>Total Members Out: $total</b><br>\n";
+echo "<b>Current Outages By Town:</b><br>\n";
+
+<td><font size=2>$town</font></td>
+
+echo "<table width=50% cellpadding=3>\n";
+echo "<tr>
+    <th bgcolor='#cccccc' align=left ><font size=2>Town</font></th>
+    <th bgcolor='#cccccc'><font size=2>#M</font></td>
+    <th bgcolor='#cccccc' align=left><font   size=2>Time Off</font></th>
+    <th bgcolor='#cccccc' align=left><font size=2>Estimated<br>Restoration Time</font></th>
+    </tr>\n";
+
+ -->
+
+
 </body>
 
 
