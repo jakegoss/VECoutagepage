@@ -12,11 +12,12 @@ $conn = mysqli_connect($host, $user, $pass, $database);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
-$orderBy = array('town', 'out', 'off', 'etr');
+$sortBy = array('town', 'out', 'off', 'etr');
+$ascdesc = ($_GET['ad'])? '0' : '1';
 
 $order = 'off';
-if (isset($_GET['orderBy']) && in_array($_GET['orderBy'], $orderBy)) {
-    $order = $_GET['orderBy'];
+if (isset($_GET['sortBy']) && in_array($_GET['sortBy'], $sortBy)) {
+    $order = $_GET['sortBy'];
 }
 //Outage Data
 $outageDataSql = "SELECT * FROM oms_by_town_live ORDER BY ".$order;
@@ -77,7 +78,7 @@ foreach ($outageData as $outage) {
 $resultID = mysqli_query($conn, $outageDataSql);
 for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
 
-
+    $ascdesc = ($_GET['ad'])? 'asc' : 'desc';
     $row = mysqli_fetch_assoc($resultID);
     $out = $row['out'];
     $town = $row['town'];
@@ -94,16 +95,15 @@ for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
     <td>$town</td>
     <td>$out</td>
     <td>$off</td>
-    <td>$etr</td>
-    <td>";
+    <td>$etr</td>";
 }
 
 echo "<table align=center border=1 width=90% cellpadding=4>\n";
 echo "<tr>
-    <th bgcolor='#cccccc'><a href='?orderBy=town'>Town</a></th>
-    <th bgcolor='#cccccc'><a href='?orderBy=out'># of Meter<br>Outages</a></th>
-    <th bgcolor='#cccccc'><a href='?orderBy=off'>Time Off</a></th>
-    <th bgcolor='#cccccc'><a href='?orderBy=etr'>Estimated<br>Restoration Time</a></th>
+    <th bgcolor='#cccccc'><a href='?sortBy=town&ad='".$ascdesc."'>Town</a></th>
+    <th bgcolor='#cccccc'><a href='?sortBy=out'># of Meter<br>Outages</a></th>
+    <th bgcolor='#cccccc'><a href='?sortBy=off'>Time Off</a></th>
+    <th bgcolor='#cccccc'><a href='?sortBy=etr'>Estimated<br>Restoration Time</a></th>
     </tr>\n";
 echo $current;
 "\n";
