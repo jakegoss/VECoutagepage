@@ -13,7 +13,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 $sortBy = array('town', 'out', 'off', 'etr');
-$ascdesc = ($_GET['ad'])? '0' : '1';
+
 
 $order = 'off';
 if (isset($_GET['sortBy']) && in_array($_GET['sortBy'], $sortBy)) {
@@ -39,10 +39,7 @@ foreach ($outageData as $outage) {
     $outageValues[$outage['town']] = $outage['out'];
 }
 
-
-
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -101,9 +98,9 @@ for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
 echo "<table align=center border=1 width=90% cellpadding=4>\n";
 echo "<tr>
     <th bgcolor='#cccccc'><a href='?sortBy=town&ad='".$ascdesc."'>Town</a></th>
-    <th bgcolor='#cccccc'><a href='?sortBy=out'># of Meter<br>Outages</a></th>
-    <th bgcolor='#cccccc'><a href='?sortBy=off'>Time Off</a></th>
-    <th bgcolor='#cccccc'><a href='?sortBy=etr'>Estimated<br>Restoration Time</a></th>
+    <th bgcolor='#cccccc'><a href='?sortBy=out&ad='".$ascdesc."''># of Meter<br>Outages</a></th>
+    <th bgcolor='#cccccc'><a href='?sortBy=off&ad='".$ascdesc."''>Time Off</a></th>
+    <th bgcolor='#cccccc'><a href='?sortBy=etr&ad='".$ascdesc."''>Estimated<br>Restoration Time</a></th>
     </tr>\n";
 echo $current;
 "\n";
@@ -112,10 +109,6 @@ echo "</table>";
 ?>
 
     </div>
-
-
-
-
 
 <script src="mapScripts.js"></script>
 </body>
