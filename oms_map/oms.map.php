@@ -12,16 +12,23 @@ $conn = mysqli_connect($host, $user, $pass, $database);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
+$orderBy = array('town', 'out', 'off', 'etr');
 
+$order = 'off';
+if (isset($_GET['orderBy']) && in_array($_GET['orderBy'], $orderBy)) {
+    $order = $_GET['orderBy'];
+}
 //Outage Data
-$outageDataSql = "SELECT * FROM oms_by_town_live;";
+$outageDataSql = "SELECT * FROM oms_by_town_live ORDER BY ".$order;
+
+
 $outageDataResult = mysqli_query($conn, $outageDataSql);
 $numOutageData = mysqli_num_rows($outageDataResult);
 
 $outageData = [];
 while ($row = mysqli_fetch_assoc($outageDataResult)) {
 
-    $outageData[$row['id']] = $row;
+    $outageData[$row['town']] = $row;
 }
 
 $outageValues = [];
@@ -30,6 +37,9 @@ foreach ($outageData as $outage) {
 
     $outageValues[$outage['town']] = $outage['out'];
 }
+
+
+
 ?>
 
 
@@ -51,6 +61,14 @@ foreach ($outageData as $outage) {
 </head>
 
 <body>
+ <!----------------- Map area ---------------------->
+<div id="mapid"></div>
+
+
+      <script type="text/javascript">
+        var outageValues = JSON.parse(<?php echo "'" . json_encode($outageValues) . "'"; ?>);
+      </script>
+
 
     <!----------------- Current Outages Table ------------------------>
     <div id="outTable">
@@ -58,6 +76,8 @@ foreach ($outageData as $outage) {
 
 $resultID = mysqli_query($conn, $outageDataSql);
 for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
+
+
     $row = mysqli_fetch_assoc($resultID);
     $out = $row['out'];
     $town = $row['town'];
@@ -78,12 +98,12 @@ for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
     <td>";
 }
 
-echo "<table width=70% cellpadding=4>\n";
+echo "<table align=center border=1 width=90% cellpadding=4>\n";
 echo "<tr>
-    <th bgcolor='#cccccc'>Town</th>
-    <th bgcolor='#cccccc'># of Meter<br>Outages</td>
-    <th bgcolor='#cccccc'>Time Off</th>
-    <th bgcolor='#cccccc'>Estimated<br>Restoration Time</th>
+    <th bgcolor='#cccccc'><a href='?orderBy=town'>Town</a></th>
+    <th bgcolor='#cccccc'><a href='?orderBy=out'># of Meter<br>Outages</a></th>
+    <th bgcolor='#cccccc'><a href='?orderBy=off'>Time Off</a></th>
+    <th bgcolor='#cccccc'><a href='?orderBy=etr'>Estimated<br>Restoration Time</a></th>
     </tr>\n";
 echo $current;
 "\n";
@@ -93,13 +113,8 @@ echo "</table>";
 
     </div>
 
-    <!----------------- Map area ---------------------->
-    <div id="mapid"></div>
 
 
-      <script type="text/javascript">
-        var outageValues = JSON.parse(<?php echo "'" . json_encode($outageValues) . "'"; ?>);
-      </script>
 
 
 <script src="mapScripts.js"></script>

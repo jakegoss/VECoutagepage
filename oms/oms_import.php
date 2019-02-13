@@ -1,16 +1,10 @@
 <?php
 header('Cache-Control: no-store, no-cache, must-revalidate');
 
-$host = "localhost";
-$user = "root";
-$pass = "";
-$database = "outagedata";
-
-
-// $host  = "localhost";
-// $user = "vec_oms";
-// $pass = "i2NoTgNkB9am";
-// $database = "vec_oms";
+$host  = "localhost";
+$user = "vec_oms";
+$pass = "i2NoTgNkB9am";
+$database = "vec_oms";
 
 $total = 0;
 
@@ -82,6 +76,25 @@ mysqli_query($linkID, $query);
 
 
 
-echo("Imports done<br>");
-include("./oms.php");
+
+
+//Planned Outages  ////  Function in place to import data from a csv file that is not yet setup. Use this method the same as you would 'current' or 'recent' outages to report 'planned' outages
+
+
+// $query = "truncate planned_outages";
+// mysqli_query($linkID, $query);
+
+// $handle = fopen("import/planned_outages.csv", "r");
+
+// while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+    //     $import="INSERT into planned_outages(tk,town,`off`,`on`,`numout`,`cause`,`desc`,`etr`)values('".$data[0]."','".$data[1]."','".$data[2]."','".$data[3]."','".$data[4]."','".$data[5]."','".$data[6]."','".$data[7]."')";
+    //     mysqli_query($linkID, $import) or die(mysqli_error());
+    
+    // }
+    
+    // fclose($handle);
+    
+    
+    echo("Imports done<br>");
+    include("./oms.php");
 ?>
