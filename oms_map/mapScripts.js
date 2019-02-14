@@ -110,7 +110,7 @@ info.update = function (props) {
 
     let message = 'Hover over a town';
     if (props) {
-        message = metersOut + ' Outages in ' + town + '</br>';
+        message = metersOut + ' Member Outages in ' + town + '</br>';
     }
 
     this._div.innerHTML = '<h4>VEC Service Territory</h4>' + message;
