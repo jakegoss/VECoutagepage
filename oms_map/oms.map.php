@@ -22,7 +22,6 @@ if (isset($_GET['sortBy']) && in_array($_GET['sortBy'], $sortBy)) {
 //Outage Data
 $outageDataSql = "SELECT * FROM oms_by_town_live ORDER BY ".$order;
 
-
 $outageDataResult = mysqli_query($conn, $outageDataSql);
 $numOutageData = mysqli_num_rows($outageDataResult);
 
@@ -90,17 +89,17 @@ for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
     }
     $current = $current . "<tr>
     <td>$town</td>
-    <td>$out</td>
+    <td bgcolor='#f5f5f5'>$out</td>
     <td>$off</td>
-    <td>$etr</td>";
+    <td bgcolor='#f5f5f5'>$etr</td>";
 }
 
-echo "<table align=center border=1 width=90% cellpadding=4>\n";
-echo "<tr>
-    <th bgcolor='#cccccc'><a href='?sortBy=town&ad='".$ascdesc."'>Town</a></th>
-    <th bgcolor='#cccccc'><a href='?sortBy=out&ad='".$ascdesc."''># of Meter<br>Outages</a></th>
-    <th bgcolor='#cccccc'><a href='?sortBy=off&ad='".$ascdesc."''>Time Off</a></th>
-    <th bgcolor='#cccccc'><a href='?sortBy=etr&ad='".$ascdesc."''>Estimated<br>Restoration Time</a></th>
+echo "<table align=center width=90% cellpadding=4>\n";
+echo "<tr class='cTable'>
+    <th bgcolor='#1682c8'><a href='?sortBy=town&ad='".$ascdesc."'><font color='white'>Town</a></th>
+    <th bgcolor='#1682c8'><font color='white'># of Member<br>Outages</a></th>
+    <th bgcolor='#1682c8'><font color='white'>Time Off</a></th>
+    <th bgcolor='#1682c8'><font color='white'>Estimated<br>Restoration Time</a></th>
     </tr>\n";
 echo $current;
 "\n";

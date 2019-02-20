@@ -28,7 +28,6 @@ $resultID = mysqli_query($linkID, $query);
 $outage_count = mysqli_num_rows($resultID);
 
 echo "<center>";
-#echo "<h5>Vermont Electric Coop Outages</h5><br>";
 $query = "select *,max(timestamp) from oms_by_town_live group by tk,town order by town,off";
 $resultID = mysqli_query($linkID,$query);
 

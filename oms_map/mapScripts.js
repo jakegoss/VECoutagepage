@@ -20,11 +20,11 @@ L.geoJson(serviceTowns, {
 // set choropleth params from metersOut in outageValues
 function getColor(metersOut) {
     return metersOut > 500 ? '#FF0000' :
-        metersOut > 100 ? '#FFA500' :
+            metersOut > 100 ? '#FFA500' :
             metersOut > 50 ? '#FFFF00' :
-                metersOut > 1 ? '#7CFC00' :
-                    metersOut > 0 ? '#0000FF' :
-                        'grey';
+            metersOut > 1 ? '#7CFC00' :
+            metersOut > 0 ? '#0000FF' :
+                            'grey';
 }
 
 // call outage data from php generated object "outageValues" and apply to polygon
@@ -70,6 +70,9 @@ function highlightFeature(e) {
 function zoomToFeature(e) {
     map.fitBounds(e.target.getBounds());
 }
+function zoomToPopUp(e) {
+    layer.bindPopup(layer.feature.properties.townMC);
+}
 function resetHighlight(e) {
     geojson.resetStyle(e.target);
     info.update();
@@ -78,6 +81,8 @@ function onEachFeature(feature, layer) {
     layer.on({
         click: zoomToFeature,
         mouseover: highlightFeature,
+        touchstart: highlightFeature,
+        touchend: resetHighlight,
         mouseout: resetHighlight
     });
 }
@@ -130,6 +135,7 @@ legend.onAdd = function (map) {
 
     // loop through our metersOut intervals and generate a label with a colored square for each interval
     // this is currently clunky and showing undersirable values
+    labels.push('<i style="background: grey"></i> ' + 'undefined');
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
         '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
