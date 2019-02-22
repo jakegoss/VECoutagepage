@@ -29,7 +29,7 @@ $resultID = mysqli_query($linkID, $query);
 $outage_count = mysqli_num_rows($resultID);
 echo "<center>";
 
-$query = "SELECT COUNT(*) FROM 'oms_by_town_live'";
+$query = "select count(town) from oms_by_town_live";
 $resultID2 = mysqli_query($linkID, $query);
 $town_total = mysqli_num_rows($resultID2);
 
