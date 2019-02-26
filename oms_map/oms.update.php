@@ -29,7 +29,7 @@ $resultID = mysqli_query($linkID, $query);
 $outage_count = mysqli_num_rows($resultID);
 echo "<center>";
 
-$query = "select count(town) from oms_by_town_live";
+$query = "select * from oms_by_town_live";
 $resultID2 = mysqli_query($linkID, $query);
 $town_total = mysqli_num_rows($resultID2);
 
@@ -139,7 +139,8 @@ $updated = date("m/d h:ia", strtotime($updated));
 
 	$updatedata = "<tr>
  <td align=center><font size=2><b>$updated</b></font></td>
- <td align=center><font size=2><b>$total</b></font></td>
+ <td align=center><font size=2><b>$SELECT town FROM all_outages WHERE town IN (SELECT town FROM town_total) GROUP BY town
+ </b></font></td>
  <td align=center><font size=2><b>$outage_count</b></font></td>
  <td align=center><font size=2><b>$town_total</b></font></td>
  </tr>\n";
