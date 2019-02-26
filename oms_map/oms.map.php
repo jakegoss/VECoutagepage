@@ -107,7 +107,7 @@ for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
 
     $ascdesc = ($_GET['ad'])? 'asc' : 'desc';
     $row = mysqli_fetch_assoc($resultID);
-    $out = $row['numout'];
+    $out = $row['out'];
     $town = $row['town'];
     $off = $row['off'];
     $off = date("m/d h:ia", strtotime($off));
@@ -117,7 +117,7 @@ for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
     } else {
         $etr = "TBD";
     }
-}
+
     
 
 // $resultID2 = mysqli_query($conn, $percentSql);
@@ -127,14 +127,14 @@ for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
 //     $result = $row['result'];
 // }
 
-// $current = $current . "<tr>
-//     <td>$town</td>
-//     <td bgcolor='#f5f5f5'>$out</td>
-//     <td>$off</td>
-//     <td bgcolor='#f5f5f5'>$etr</td>
-//     <td>$result</td>
-//     </tr>";
-
+$current = $current . "<tr>
+    <td>$town</td>
+    <td bgcolor='#f5f5f5'>$out</td>
+    <td>$off</td>
+    <td bgcolor='#f5f5f5'>$etr</td>
+    <td>$result</td>
+    </tr>";
+}
 
 // $percents = $percents . "<tr>
 //     <td>$result</td>";
