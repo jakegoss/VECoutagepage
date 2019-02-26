@@ -25,7 +25,7 @@ if (isset($_GET['sortBy']) && in_array($_GET['sortBy'], $sortBy)) {
 
 
 //Select # of live outages
-$outageDataSql = "SELECT * FROM all_outages ORDER BY ".$order;
+$outageDataSql = "SELECT * FROM oms_by_town_live ORDER BY ".$order;
 
 $outageDataResult = mysqli_query($conn, $outageDataSql);
 $numOutageData = mysqli_num_rows($outageDataResult);
@@ -40,7 +40,7 @@ $outageValues = [];
 
 foreach ($outageData as $outage) {
     
-    $outageValues[$outage['town']] = $outage['numout'];
+    $outageValues[$outage['town']] = $outage['out'];
 }
 
 
