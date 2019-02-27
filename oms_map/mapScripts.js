@@ -115,7 +115,7 @@ info.update = function (props) {
 
     let message = 'Hover over a town';
     if (props) {
-        message = metersOut + ' Member Outages in ' + town + '</br>';
+        message = metersOut + '% of Members affected in ' + town + '</br>';
     }
 
     this._div.innerHTML = '<h4>VEC Service Territory</h4>' + message;
@@ -135,6 +135,7 @@ legend.onAdd = function (map) {
 
     // loop through our metersOut intervals and generate a label with a colored square for each interval
     // this is currently clunky and showing undersirable values
+    
     labels.push('<i style="background: grey"></i> ' + 'undefined');
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
