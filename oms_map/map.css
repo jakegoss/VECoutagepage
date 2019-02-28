@@ -9,7 +9,9 @@ body {
     width: 600px;
     border: 2px solid black !important;
 }
-
+#outTable{
+    font-family: 'Source Sans Pro', sans-serif !important;
+}
 table{
     margin: auto;
     border: 1px solid #454545;

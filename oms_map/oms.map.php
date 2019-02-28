@@ -50,12 +50,11 @@ foreach ($outageData as $percent) {
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>VEC Outage Reports</title>
+    <title>VEC Outage Center</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="leaflet.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
     <script src="serviceTowns.js"></script>
-    <script src="townMeters.js"></script>
     <link rel="stylesheet" href="leaflet.css" />
     <link rel="stylesheet" href="map.css" />
 
