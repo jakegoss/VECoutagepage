@@ -7,7 +7,6 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     maxZoom: 11,
 }).addTo(map);
 
-// var dataObject
 
 // add town polygon
 L.geoJson(serviceTowns, {
@@ -19,12 +18,12 @@ L.geoJson(serviceTowns, {
 
 // set choropleth params from metersOut in outageValues
 function getColor(metersOut) {
-    return metersOut > 500 ? '#FF0000' :
-            metersOut > 100 ? '#FFA500' :
-            metersOut > 50 ? '#FFFF00' :
-            metersOut > 1 ? '#7CFC00' :
-            metersOut > 0 ? '#0000FF' :
-                            'grey';
+    return metersOut > 80 ? '#FF0000' :
+           metersOut > 60 ? '#FFA500' :
+           metersOut > 40 ? '#FFFF00' :
+           metersOut > 20 ? '#7CFC00' :
+           metersOut > 0 ? '#0000FF' :
+                        'grey';
 }
 
 // call outage data from php generated object "outageValues" and apply to polygon
@@ -44,13 +43,12 @@ function style(feature) {
 L.geoJson(serviceTowns, { style: style }).addTo(map);
 
 
-// create hover hightlight and townname popup feature
+// create hover hightlight and add data to infopane
 
 function highlightFeature(e) {
-    
+
     var layer = e.target;
-    
-    highLightPopup();
+
     info.update(layer.feature.properties);
     layer.setStyle({
         weight: 4,
@@ -61,31 +59,35 @@ function highlightFeature(e) {
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
+}
 
-    function highLightPopup() {
-        layer.bindPopup(layer.feature.properties.townMC);
-    }
-}
-// zoom in on click and show town name and outage data
-function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
-}
-function zoomToPopUp(e) {
-    layer.bindPopup(layer.feature.properties.townMC);
-}
+// Clear previous hover info on mouseout
 function resetHighlight(e) {
     geojson.resetStyle(e.target);
     info.update();
 }
+
 function onEachFeature(feature, layer) {
+
+    //  Onclick gets townname with # of members affected and % of town affected
+    var popup = layer.bindPopup(
+
+
+
+
+        // ('<h3>' + feature.properties.townMC + '</h3><p># of members affected: ' + feature.properties.totMeters + '<br/>' + feature.properties.metersOut + '% of ' + feature.properties.townMC + ' affected')
+    );
+    
+// Set click params and generate popup for click
     layer.on({
-        click: zoomToFeature,
+        click: popup,
         mouseover: highlightFeature,
-        touchstart: highlightFeature,
-        touchend: resetHighlight,
         mouseout: resetHighlight
     });
 }
+
+
+
 
 geojson = L.geoJson(serviceTowns, {
     style: style,
@@ -130,17 +132,17 @@ var legend = L.control({ position: 'bottomright' });
 legend.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 1, 50, 100, 500],
+        grades = [0, 20, 40, 60, 80],
         labels = [];
 
     // loop through our metersOut intervals and generate a label with a colored square for each interval
     // this is currently clunky and showing undersirable values
-    
+
     labels.push('<i style="background: grey"></i> ' + 'undefined');
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
-        '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-        grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
     }
 
     return div;

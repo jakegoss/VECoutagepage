@@ -19,12 +19,12 @@ L.geoJson(serviceTowns, {
 
 // set choropleth params from metersOut in outageValues
 function getColor(metersOut) {
-    return  metersOut > 80 ? '#FF0000' :
-            metersOut > 60 ? '#FFA500' :
+    return metersOut > 80 ? '#FF0000' :
+        metersOut > 60 ? '#FFA500' :
             metersOut > 40 ? '#FFFF00' :
-            metersOut > 20 ? '#7CFC00' :
-            metersOut > 0 ? '#0000FF' :
-                            'grey';
+                metersOut > 20 ? '#7CFC00' :
+                    metersOut > 0 ? '#0000FF' :
+                        'grey';
 }
 
 // call outage data from php generated object "outageValues" and apply to polygon
@@ -47,9 +47,9 @@ L.geoJson(serviceTowns, { style: style }).addTo(map);
 // create hover hightlight and townname popup feature
 
 function highlightFeature(e) {
-    
+
     var layer = e.target;
-    
+
     info.update(layer.feature.properties);
     layer.setStyle({
         weight: 4,
@@ -81,18 +81,22 @@ function resetHighlight(e) {
 
 
 function onEachFeature(feature, layer) {
-    
-    //  Onclick gets townname and # of 
+
+    //  Onclick gets townname with # of members affected and % of town affected
+
     var popup = layer.bindPopup(
-    ('<h3>' + feature.properties.townMC + '</h3><p># of members affected: ' + feature.properties.totMeters + '<br/>' + feature.properties.metersOut + '% of ' + feature.properties.townMC + ' affected' )
-        );
-    
+        ('<h3>' + feature.properties.townMC + '</h3><p># of members affected: ' + feature.properties.totMeters + '<br/>' + feature.properties.metersOut + '% of ' + feature.properties.townMC + ' affected')
+    );
+
+// Set click params and generate popup for click
     layer.on({
         click: popup,
         mouseover: highlightFeature,
         mouseout: resetHighlight
     });
 }
+
+
 
 geojson = L.geoJson(serviceTowns, {
     style: style,
@@ -135,32 +139,33 @@ info.update = function (props) {
 
 info.addTo(map);
 
-// create legend in bottom right and call colors from choropleth params set in getColor function
+// create legend in bottom and call colors from choropleth params set in getColor function
 
 var legend = L.control({ position: 'bottomleft' });
 
 legend.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 20, 40, 60, 80],
-        labels = [];
+        grades = [1, 20, 40, 60, 80],
+        labels = [],
+        from, to;
 
-    // loop through our metersOut intervals and generate a label with a colored square for each interval
-    // this is currently clunky and showing undersirable values
-    
-    labels.push('<i style="background: grey"></i> ' + 'undefined');
+        labels.push('<p>% of Town<br/>Affected</p><br/><i style="background: grey"></i> ' + '0');
     for (var i = 0; i < grades.length; i++) {
-        div.innerHTML +=
-        '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-        grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-    }
+        from = grades[i];
+        to = grades [i + 1];
 
+        div.innerHTML =
+        labels.push(
+            '<i style="background:' + getColor(from + 1) + '"></i> ' + from + (to ? '&ndash;' + to : '+' ));
+    }
+    div.innerHTML = labels.join('<br>');
     return div;
 };
 
 legend.addTo(map);
 
-
+// '% of Towns Affected Scale<br/>'
 // //// features diabled
 
 // map.dragging.disable();

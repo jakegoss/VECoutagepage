@@ -40,6 +40,11 @@ table{
     color: #555;
 }
 
+.legend p {
+    font-size: 14px !important;
+    margin: 0 !important;
+    font-weight: 600;
+}
 .legend i {
     width: 18px;
     height: 18px;
