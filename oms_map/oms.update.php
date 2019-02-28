@@ -130,27 +130,26 @@ $updated = date("m/d h:ia", strtotime($updated));
 				 	  $etr = "TBD";
 				 }
 	 			 $current = $current . "<tr>
-	 			 <td align=center><font size=2>$updated</font></td>
-	 			 <td align=center><font size=2>$town</font></td>
-	 			 <td align=center><font size=2>$out</font></td>
-	 			 <td align=center><font size=2>$off</font></td>
+	 			 <td align=center><font size=3>$updated</font></td>
+	 			 <td align=center><font size=3>$town</font></td>
+	 			 <td align=center><font size=3>$out</font></td>
+	 			 <td align=center><font size=3>$off</font></td>
 	 			 </tr>\n";
 	}
 
 	$updatedata = "<tr>
- <td align=center><font size=2><b>$updated</b></font></td>
- <td align=center><font size=2><b>$SELECT town FROM all_outages WHERE town IN (SELECT town FROM town_total) GROUP BY town
- </b></font></td>
- <td align=center><font size=2><b>$outage_count</b></font></td>
- <td align=center><font size=2><b>$town_total</b></font></td>
+ <td align=center><font size=3><b>$updated</b></font></td>
+ <td align=center><font size=3><b>$total</b></font></td>
+ <td align=center><font size=3><b>$outage_count</b></font></td>
+ <td align=center><font size=3><b>$town_total</b></font></td>
  </tr>\n";
 
-  echo "<table width=80% cellpadding=3>\n";
+  echo "<table width=80% cellpadding=4>\n";
   echo "<tr>
-  		<th bgcolor='#e47322' align=center><font color='white' size=2>Last Updated</font></th>
-  		<th bgcolor='#e47322' align=center><font color='white' size=2>Members Affected</font></th>
-        <th bgcolor='#e47322' align=center><font color='white' size=2>Outage Incident(s)</font></th>
-        <th bgcolor='#e47322' align=center><font color='white' size=2>Town(s) Affected</font></th>\n";
+  		<th bgcolor='#e47322' align=center><font color='white' size=3>Last Updated</font></th>
+  		<th bgcolor='#e47322' align=center><font color='white' size=3>Members Affected</font></th>
+        <th bgcolor='#e47322' align=center><font color='white' size=3>Outage Incident(s)</font></th>
+        <th bgcolor='#e47322' align=center><font color='white' size=3>Town(s) Affected</font></th>\n";
   echo $updatedata;
   echo "</table>";
 }
