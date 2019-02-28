@@ -1,5 +1,5 @@
 // set initial map view point
-var map = L.map('mapid').setView([44.5, -72.6034], 8);
+const map = L.map('mapid').setView([44.5, -72.6034], 8);
 
 // add map tile layer and set max zoom
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -7,6 +7,11 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     maxZoom: 11,
 }).addTo(map);
 
+// Global Variables ////////
+const outageValues = serviceTowns;
+let metersOut = '0';
+let percentOut = '';
+let town = '';
 
 // add town polygon
 L.geoJson(serviceTowns, {
@@ -17,12 +22,12 @@ L.geoJson(serviceTowns, {
 }).addTo(map)
 
 // set choropleth params from metersOut in outageValues
-function getColor(metersOut) {
-    return metersOut > 80 ? '#FF0000' :
-           metersOut > 60 ? '#FFA500' :
-           metersOut > 40 ? '#FFFF00' :
-           metersOut > 20 ? '#7CFC00' :
-           metersOut > 0 ? '#0000FF' :
+function getColor(percentOut) {
+    return percentOut > 80 ? '#FF0000' :
+           percentOut > 60 ? '#FFA500' :
+           percentOut > 40 ? '#FFFF00' :
+           percentOut > 20 ? '#7CFC00' :
+           percentOut > 0 ? '#0000FF' :
                         'grey';
 }
 
@@ -30,10 +35,10 @@ function getColor(metersOut) {
 
 function style(feature) {
 
-    let metersOut = outageValues[feature.properties.town];
+    let percentOut = outageValues[feature.properties.town];
 
     return {
-        fillColor: getColor(metersOut),
+        fillColor: getColor(percentOut),
         weight: 1,
         opacity: 1,
         color: 'black',
@@ -43,11 +48,11 @@ function style(feature) {
 L.geoJson(serviceTowns, { style: style }).addTo(map);
 
 
-// create hover hightlight and add data to infopane
+// create hover hightlight and townname feature ////////
 
 function highlightFeature(e) {
 
-    var layer = e.target;
+    let layer = e.target;
 
     info.update(layer.feature.properties);
     layer.setStyle({
@@ -61,42 +66,45 @@ function highlightFeature(e) {
     }
 }
 
-// Clear previous hover info on mouseout
 function resetHighlight(e) {
     geojson.resetStyle(e.target);
     info.update();
 }
-
-function onEachFeature(feature, layer) {
-
-    //  Onclick gets townname with # of members affected and % of town affected
-    var popup = layer.bindPopup(
+// End highlight //////
 
 
-
-
-        // ('<h3>' + feature.properties.townMC + '</h3><p># of members affected: ' + feature.properties.totMeters + '<br/>' + feature.properties.metersOut + '% of ' + feature.properties.townMC + ' affected')
-    );
+//  Onclick gets townname with # of members affected and % of town affected ////////
+function popUpClick(layer, feature) {
     
-// Set click params and generate popup for click
-    layer.on({
-        click: popup,
-        mouseover: highlightFeature,
-        mouseout: resetHighlight
-    });
-}
+    layer.bindPopup(('<h3>' + town + '</h3><p># of members affected: ' + metersOut + '<br/>' + percentOut + '% of ' + town + ' affected'))};
+   
+   
+   // Define hover and click events
+   function onEachFeature(feature, layer) {
+   
+       const popup = popUpClick(layer, feature);
+   
+       
+   // Set click params and generate popup for click ///////////
+       layer.on({
+           click: popup,
+           mouseover: highlightFeature,
+           mouseout: resetHighlight
+       });
+   }
+//End Mouse functions ///
 
-
-
-
+// Keep json layer fresh ////
 geojson = L.geoJson(serviceTowns, {
     style: style,
     onEachFeature: onEachFeature,
 }).addTo(map);
 
-// Add Info pane to map div
+// ////
+// Add Info pane to map div ////////
+// ///////
 
-var info = L.control();
+const info = L.control();
 
 info.onAdd = function (map) {
     this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
@@ -107,17 +115,18 @@ info.onAdd = function (map) {
 // call town data from outageValues and display in infopane
 info.update = function (props) {
 
-    let metersOut = '0';
-    let town = '';
-
+    
+// parse data from php db
     if (props) {
         metersOut = (outageValues[props.town] ? outageValues[props.town] : 0);
+        percentOut = (outageValues[props.town] ? outageValues[props.town] : 0);
         town = props.townMC;
     }
 
     let message = 'Hover over a town';
     if (props) {
-        message = metersOut + '% of Members affected in ' + town + '</br>';
+        message = (metersOut + ' Members affected in ' + town + '<br/>' + percentOut + '% of ' + town + ' affected' + '<br/>'
+        );
     }
 
     this._div.innerHTML = '<h4>VEC Service Territory</h4>' + message;
@@ -125,33 +134,35 @@ info.update = function (props) {
 
 info.addTo(map);
 
-// create legend in bottom right and call colors from choropleth params set in getColor function
+// ////////////
+// create legend in bottom and call colors from choropleth params set in getColor function
 
-var legend = L.control({ position: 'bottomright' });
+const legend = L.control({ position: 'bottomleft' });
 
 legend.onAdd = function (map) {
 
-    var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 20, 40, 60, 80],
-        labels = [];
+    let div = L.DomUtil.create('div', 'info legend'),
+        grades = [1, 20, 40, 60, 80],
+        labels = [],
+        from, to;
 
-    // loop through our metersOut intervals and generate a label with a colored square for each interval
-    // this is currently clunky and showing undersirable values
+        labels.push('<p>% of Town<br/>Affected</p><br/><i style="background: grey"></i> ' + '0');   // title and trick legend into showing null value for grey
+    for (let i = 0; i < grades.length; i++) {
+        from = grades[i];
+        to = grades [i + 1];
 
-    labels.push('<i style="background: grey"></i> ' + 'undefined');
-    for (var i = 0; i < grades.length; i++) {
-        div.innerHTML +=
-            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+        div.innerHTML =
+        labels.push(
+            '<i style="background:' + getColor(from + 1) + '"></i> ' + from + (to ? '&ndash;' + to : '+' ));
     }
-
+    div.innerHTML = labels.join('<br>');
     return div;
 };
 
 legend.addTo(map);
 
 
-// //// features diabled
+////// features diabled
 
 // map.dragging.disable();
 // map.touchZoom.disable();
