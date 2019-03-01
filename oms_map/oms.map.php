@@ -37,9 +37,12 @@ foreach ($outageData as $outage) {
 
     $outageValues[$outage['town']] = $outage['out'];
 }
+
+$percentValues = [];
+
 foreach ($outageData as $percent) {
 
-    $outageValues[$percent['town']] = $percent['percent'];
+    $percentValues[$percent['town']] = round($percent['percent'], 2);
 }
 
 ?>
@@ -67,6 +70,7 @@ foreach ($outageData as $percent) {
 
       <script type="text/javascript">
         var outageValues = JSON.parse(<?php echo "'" . json_encode($outageValues) . "'"; ?>);
+        var percentValues = JSON.parse(<?php echo "'" . json_encode($percentValues) . "'"; ?>);
       </script>
 
 
@@ -116,7 +120,7 @@ echo "</table>";
 
     </div>
 
-<script src="mapScripts.js"></script>
+<script src="mapScripts.js"?=v18></script>
 </body>
 
 

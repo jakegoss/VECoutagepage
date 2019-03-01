@@ -8,10 +8,9 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 // Global Variables ////////
-const outageValues = serviceTowns;
-let metersOut = '0';
-let percentOut = '';
-let town = '';
+// let metersOut = '0';
+// let percentOut = '';
+// let town = '';
 
 // add town polygon
 L.geoJson(serviceTowns, {
@@ -35,7 +34,7 @@ function getColor(percentOut) {
 
 function style(feature) {
 
-    let percentOut = outageValues[feature.properties.town];
+    let percentOut = percentValues[feature.properties.town];
 
     return {
         fillColor: getColor(percentOut),
@@ -74,15 +73,22 @@ function resetHighlight(e) {
 
 
 //  Onclick gets townname with # of members affected and % of town affected ////////
-function popUpClick(layer, feature) {
+function popUpClick(layer, props) {
     
-    layer.bindPopup(('<h3>' + town + '</h3><p># of members affected: ' + metersOut + '<br/>' + percentOut + '% of ' + town + ' affected'))};
-   
+    if (props) {
+        metersOut = (outageValues[props.town] ? outageValues[props.town] : 0);
+        percentOut = (percentValues[props.town] ? percentValues[props.town] : 0);
+        town = props.townMC;
+    }
+    let body = ''
+    if (props) {
+    body = (layer.bindPopup(('<h3>' + town + '</h3><p># of members affected: ' + metersOut + '<br/>' + percentOut + '% of ' + town + ' affected')))}
+}   
    
    // Define hover and click events
    function onEachFeature(feature, layer) {
    
-       const popup = popUpClick(layer, feature);
+       let popup = popUpClick(layer, feature);
    
        
    // Set click params and generate popup for click ///////////
@@ -92,6 +98,7 @@ function popUpClick(layer, feature) {
            mouseout: resetHighlight
        });
    }
+
 //End Mouse functions ///
 
 // Keep json layer fresh ////
@@ -104,7 +111,7 @@ geojson = L.geoJson(serviceTowns, {
 // Add Info pane to map div ////////
 // ///////
 
-const info = L.control();
+var info = L.control();
 
 info.onAdd = function (map) {
     this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
@@ -119,7 +126,7 @@ info.update = function (props) {
 // parse data from php db
     if (props) {
         metersOut = (outageValues[props.town] ? outageValues[props.town] : 0);
-        percentOut = (outageValues[props.town] ? outageValues[props.town] : 0);
+        percentOut = (percentValues[props.town] ? percentValues[props.town] : 0);
         town = props.townMC;
     }
 
