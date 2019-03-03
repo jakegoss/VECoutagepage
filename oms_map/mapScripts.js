@@ -23,10 +23,10 @@ L.geoJson(serviceTowns, {
 // set choropleth params from metersOut in outageValues
 function getColor(percentOut) {
     return percentOut > 80 ? '#FF0000' :
-           percentOut > 60 ? '#FFA500' :
-           percentOut > 40 ? '#FFFF00' :
-           percentOut > 20 ? '#7CFC00' :
-           percentOut > 0 ? '#0000FF' :
+        percentOut > 60 ? '#FFA500' :
+            percentOut > 40 ? '#FFFF00' :
+                percentOut > 20 ? '#7CFC00' :
+                    percentOut > 0 ? '#0000FF' :
                         'grey';
 }
 
@@ -73,31 +73,30 @@ function resetHighlight(e) {
 
 
 //  Onclick gets townname with # of members affected and % of town affected ////////
-function popUpClick(layer, props) {
+function popUpClick(feature, layer) {
+    let props = feature.properties;
+    if (props) {
+        let metersOut = (outageValues[props.town] ? outageValues[props.town] : 0);
+        let percentOut = (percentValues[props.town] ? percentValues[props.town] : 0);
+        let town = feature.properties.townMC;
     
     if (props) {
-        metersOut = (outageValues[props.town] ? outageValues[props.town] : 0);
-        percentOut = (percentValues[props.town] ? percentValues[props.town] : 0);
-        town = props.townMC;
+        (layer.bindPopup(('<h3>' + town + '</h3><p># of members affected: ' + metersOut + '<br/>' + percentOut + '% of ' + town + ' affected')))
     }
-    let body = ''
-    if (props) {
-    body = (layer.bindPopup(('<h3>' + town + '</h3><p># of members affected: ' + metersOut + '<br/>' + percentOut + '% of ' + town + ' affected')))}
-}   
-   
-   // Define hover and click events
-   function onEachFeature(feature, layer) {
-   
-       let popup = popUpClick(layer, feature);
-   
-       
-   // Set click params and generate popup for click ///////////
-       layer.on({
-           click: popup,
-           mouseover: highlightFeature,
-           mouseout: resetHighlight
-       });
-   }
+}}
+// Define hover and click events
+function onEachFeature(feature, layer) {
+
+    let popup = popUpClick(feature, layer);
+
+
+    // Set click params and generate popup for click ///////////
+    layer.on({
+        click: popup,
+        mouseover: highlightFeature,
+        mouseout: resetHighlight
+    });
+}
 
 //End Mouse functions ///
 
@@ -122,8 +121,8 @@ info.onAdd = function (map) {
 // call town data from outageValues and display in infopane
 info.update = function (props) {
 
-    
-// parse data from php db
+
+    // parse data from php db
     if (props) {
         metersOut = (outageValues[props.town] ? outageValues[props.town] : 0);
         percentOut = (percentValues[props.town] ? percentValues[props.town] : 0);
@@ -153,14 +152,14 @@ legend.onAdd = function (map) {
         labels = [],
         from, to;
 
-        labels.push('<p>% of Town<br/>Affected</p><br/><i style="background: grey"></i> ' + '0');   // title and trick legend into showing null value for grey
+    labels.push('<p>% of Town<br/>Affected</p><br/><i style="background: grey"></i> ' + '0');   // title and trick legend into showing null value for grey
     for (let i = 0; i < grades.length; i++) {
         from = grades[i];
-        to = grades [i + 1];
+        to = grades[i + 1];
 
         div.innerHTML =
-        labels.push(
-            '<i style="background:' + getColor(from + 1) + '"></i> ' + from + (to ? '&ndash;' + to : '+' ));
+            labels.push(
+                '<i style="background:' + getColor(from + 1) + '"></i> ' + from + (to ? '&ndash;' + to : '+'));
     }
     div.innerHTML = labels.join('<br>');
     return div;
