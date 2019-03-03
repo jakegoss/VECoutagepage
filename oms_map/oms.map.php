@@ -120,7 +120,7 @@ echo "</table>";
 
     </div>
 
-<script src="mapScripts.js"?=v18></script>
+<script src="mapScripts.js"?=v31></script>
 </body>
 
 
