@@ -12,15 +12,16 @@ $conn = mysqli_connect($host, $user, $pass, $database);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
-$sortBy = array('town');
+// $sortBy = array('town');
 
-$order = 'off';
-if (isset($_GET['sortBy']) && in_array($_GET['sortBy'], $sortBy)) {
-    $order = $_GET['sortBy'];
-}
+// $order = 'off';
+// if (isset($_GET['sortBy']) && in_array($_GET['sortBy'], $sortBy)) {
+//     $order = $_GET['sortBy'];
+// }
 
 //Select # of live outages
-$outageDataSql = "SELECT * FROM oms_by_town_live_percent ORDER BY " . $order;
+// $outageDataSql = "SELECT * FROM oms_by_town_live_percent ORDER BY " . $order;
+$outageDataSql = "SELECT * FROM oms_by_town_live_percent ";
 
 $outageDataResult = mysqli_query($conn, $outageDataSql);
 $numOutageData = mysqli_num_rows($outageDataResult);
@@ -81,7 +82,7 @@ foreach ($outageData as $percent) {
 $resultID = mysqli_query($conn, $outageDataSql);
 for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
 
-    $ascdesc = ($_GET['ad']) ? 'asc' : 'desc';
+    // $order = ($_GET['ad']) ? 'asc' : 'desc';
     $row = mysqli_fetch_assoc($resultID);
     $out = $row['out'];
     $percent = round($row['percent'], 2);
@@ -106,7 +107,7 @@ for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
 
 echo "<table align=center width=90% cellpadding=3>\n";
 echo "<tr class='cTable'>
-    <th bgcolor='#1682c8'><a href='?sortBy=town&ad='" . $ascdesc . "'><font color='white'>Town</font></a></th>
+    <th bgcolor='#1682c8'><font color='white'>Town</font></th>
     <th bgcolor='#1682c8'><font color='white'># of Member<br>Outages</font></th>
     <th bgcolor='#1682c8'><font color='white'>Time Off</font></th>
     <th bgcolor='#1682c8'><font color='white'>Estimated<br>Restoration Time</font></th>

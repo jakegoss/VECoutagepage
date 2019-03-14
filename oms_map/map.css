@@ -14,7 +14,11 @@ body {
     font-family: 'Source Sans Pro', sans-serif !important;
 }
 #outTable th {
-    font-weight: normal !important;
+    font-weight: lighter !important;
+}
+#outTable td {
+    font-weight: lighter !important;
+    font-size: small !important;
 }
 
 table{
@@ -24,7 +28,8 @@ table{
 
 .info {
     padding: 6px 8px;
-    font: 16px/18px 'Source Sans Pro', sans-serif;
+    font: 16px/18px 'Source Sans Pro', sans-serif !important;
+    font-size: small;
     background: white;
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);

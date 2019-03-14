@@ -133,7 +133,9 @@
 	clear: both;
 	}
 .leaflet-right .leaflet-control {
-	float: right;
+	position: relative;
+	right: 40px;
+	top: 290px;
 	}
 .leaflet-top .leaflet-control {
 	margin-top: 10px;
