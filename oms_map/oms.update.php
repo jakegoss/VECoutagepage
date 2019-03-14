@@ -48,7 +48,7 @@ $total = $row_t['Total_Out'];
 
 
 
-echo "<div style='border: 1px solid black; padding-top: 10px; margin-bottom: 10px;'>";
+echo "<div padding-top: 10px; margin-bottom: 10px;'>";
 echo "<form action='".$_SERVER["PHP_SELF"]."' style='background-color: #ffffff; height: 25px;' method='post'>Account Number: <input size=20 name=search> <input type=submit value='Search'> </form>\n";
 echo "<p><font size=3>Enter your account number to get the estimated restoration time for your outage.<br>If you do not know your account number, please call 1-800-832-2667.</font></p><br>\n";
  echo "</div>";
@@ -138,10 +138,10 @@ $updated = date("m/d h:ia", strtotime($updated));
 	}
 
 	$updatedata = "<tr>
- <td align=center><font size=3><b>$updated</b></font></td>
- <td align=center><font size=3><b>$total</b></font></td>
- <td align=center><font size=3><b>$outage_count</b></font></td>
- <td align=center><font size=3><b>$town_total</b></font></td>
+ <td align=center><font size=3>$updated</font></td>
+ <td align=center><font size=3>$total</font></td>
+ <td align=center><font size=3>$outage_count</font></td>
+ <td align=center><font size=3>$town_total</font></td>
  </tr>\n";
 
   echo "<table width=80% cellpadding=4>\n";

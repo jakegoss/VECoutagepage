@@ -254,7 +254,7 @@
 
 /* general typography */
 .leaflet-container {
-	font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font: 12px/1.5 'Source Sans Pro', sans-serif;
 	}
 
 
@@ -461,8 +461,8 @@
 .leaflet-popup-content {
 	margin: 13px 19px;
 	line-height: 1.4;
-	font: 14px/16px Arial, Helvetica, sans-serif;
-	font-weight: 600;
+	font: 14px/16px 'Source Sans Pro', sans-serif;
+	font-weight:400;
 	}
 .leaflet-popup-content p {
 	margin: 18px 0;
@@ -504,7 +504,7 @@
 	text-align: center;
 	width: 18px;
 	height: 14px;
-	font: 16px/14px Tahoma, Verdana, sans-serif;
+	font: 16px/14px 'Source Sans Pro', sans-serif;
 	color: #c3c3c3;
 	text-decoration: none;
 	font-weight: bold;

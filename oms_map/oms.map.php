@@ -97,21 +97,21 @@ for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
     }
 
     $current = $current . "<tr>
-    <td>$town</td>
-    <td bgcolor='#f5f5f5'>$out</td>
-    <td>$off</td>
-    <td bgcolor='#f5f5f5'>$etr</td>
-    <td>$percent</td>
+    <td align=center><font size=3>$town</font></td>
+    <td align=center bgcolor='#f5f5f5'><font size=3>$out</font></td>
+    <td align=center><font size=3>$off</font></td>
+    <td align=center bgcolor='#f5f5f5'><font size=3>$etr</font></td>
+    <td align=center><font size=3>$percent</font></td>
     </tr>";
 }
 
 echo "<table align=center width=90% cellpadding=3>\n";
 echo "<tr class='cTable'>
-    <th bgcolor='#1682c8'><font color='white'>Town</font></th>
-    <th bgcolor='#1682c8'><font color='white'># of Member<br>Outages</font></th>
-    <th bgcolor='#1682c8'><font color='white'>Time Off</font></th>
-    <th bgcolor='#1682c8'><font color='white'>Estimated<br>Restoration Time</font></th>
-    <th bgcolor='#1682c8'><font color='white'>Percent Out</font></th>
+    <th bgcolor='#1682c8'><font color='white' size=3>Town</font></th>
+    <th bgcolor='#1682c8'><font color='white' size=3># of Member<br>Outages</font></th>
+    <th bgcolor='#1682c8'><font color='white' size=3>Time Off</font></th>
+    <th bgcolor='#1682c8'><font color='white' size=3>Estimated<br>Restoration Time</font></th>
+    <th bgcolor='#1682c8'><font color='white' size=3>Percent Out</font></th>
     </tr>\n";
 echo $current;
 "\n";

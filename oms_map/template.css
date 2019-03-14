@@ -2625,6 +2625,7 @@ table {
 .table th {
 	font-weight: bold;
 }
+
 .table thead th {
 	vertical-align: bottom;
 }

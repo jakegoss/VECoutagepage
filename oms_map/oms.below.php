@@ -32,13 +32,13 @@ mysqli_select_db( $linkID, $database) or die("Could not find database.");
 <h4 style="text-align: center;">Recent Outages (last 24 hours)</h4>
 <Table class="outage" border='0' cellspacing='1' cellpadding='3' width=100%>   <thead > 
 <tr>
-<th bgcolor='#0082c8'><font color="white" size=2>Town</font></th>
-<th bgcolor='#0082c8' ><font color="white" size=2>#M</font></th>
-<th bgcolor='#0082c8'><font  color="white" size=2>Time Off</font></th>
-<th bgcolor='#0082c8'><font color="white" size=2>Time on</font></th>
-<th bgcolor='#0082c8'><font color="white" size=2>Cause</font></th>
-<th bgcolor='#0082c8'><font color="white" size=2>Desc.</font></th>
-<th bgcolor='#0082c8'><font color="white" size=2>Ticket#</font></th></tr>
+<th bgcolor='#0082c8'><font color="white" size=3>Town</font></th>
+<th bgcolor='#0082c8' ><font color="white" size=3>#M</font></th>
+<th bgcolor='#0082c8'><font color="white" size=3>Time Off</font></th>
+<th bgcolor='#0082c8'><font color="white" size=3>Time on</font></th>
+<th bgcolor='#0082c8'><font color="white" size=3>Cause</font></th>
+<th bgcolor='#0082c8'><font color="white" size=3>Desc.</font></th>
+<th bgcolor='#0082c8'><font color="white" size=3>Ticket#</font></th></tr>
 </thead>
 
 <?php
