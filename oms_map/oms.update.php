@@ -10,7 +10,7 @@
 </head>
 
 <body class="site com_content view-article no-layout no-task itemid-207 fluid">
-<!--  -->
+
 
 <?php
 
@@ -31,7 +31,7 @@ echo "<center>";
 
 $query = "select * from oms_by_town_live";
 $resultID2 = mysqli_query($linkID, $query);
-$town_total = mysqli_num_rows($resultID2);
+$town_total = mysqli_num_rows($resultID2); 
 
 $query = "select *,max(timestamp) from oms_by_town_live group by tk,town order by town,off";
 $resultID = mysqli_query($linkID,$query);
