@@ -94,7 +94,7 @@ if ($outage_count > 0) {
 
     echo "<div padding-top: 10px; margin-bottom: 10px;'>";
     echo "<form action='" . $_SERVER["PHP_SELF"] . "' style='background-color: #ffffff; height: 25px;' method='post'>Account Number: <input size=20 name=search> <input type=submit value='Search'> </form>\n";
-    echo "<p><font size=3>Enter your account number to get the estimated restoration time for your outage.<br>If you do not know your account number, please call 1-800-832-2667.</font></p><br>\n";
+    echo "<span><font size=3>Enter your account # to get the estimated restoration time for your outage. If you do not know your account number, please call 1-800-832-2667. Note: if you enter your account # and the reply is \"account not found\" your outage is not recorded in our system. Please inform us by calling or through your <a href='https://vermontelectric.smarthub.coop/Login.html'>SmartHub account</a>.</font></span><br>\n";
     echo "</div>";
 
     $search = filter_var($_REQUEST['search'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_AMP);
