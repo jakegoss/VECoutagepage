@@ -21,7 +21,7 @@ if (!$conn) {
 
 //Select # of live outages
 // $outageDataSql = "SELECT * FROM oms_by_town_live_percent ORDER BY " . $order;
-$outageDataSql = "SELECT * FROM oms_by_town_live_percent ";
+$outageDataSql = "SELECT * FROM oms_by_town_live_percent group by tk ";
 
 $outageDataResult = mysqli_query($conn, $outageDataSql);
 $numOutageData = mysqli_num_rows($outageDataResult);
@@ -43,7 +43,7 @@ $percentValues = [];
 
 foreach ($outageData as $percent) {
 
-    $percentValues[$percent['town']] = round($percent['percent'], 2);
+    $percentValues[$percent['town']] = ceil($percent['percent']);
 }
 
 ?>
@@ -85,7 +85,7 @@ for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
     // $order = ($_GET['ad']) ? 'asc' : 'desc';
     $row = mysqli_fetch_assoc($resultID);
     $out = $row['out'];
-    $percent = round($row['percent'], 2);
+    $percent = ceil($row['percent']);
     $town = $row['town'];
     $off = $row['off'];
     $off = str_replace(array('am','pm'),array(' a.m.',' p.m.'),date("n/j g:ia", strtotime($off)));
