@@ -88,10 +88,10 @@ for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
     $percent = round($row['percent'], 2);
     $town = $row['town'];
     $off = $row['off'];
-    $off = date("m/d h:ia", strtotime($off));
+    $off = str_replace(array('am','pm'),array(' a.m.',' p.m.'),date("n/j g:ia", strtotime($off)));
     $etr = $row['etr'];
     if ($etr != null) {
-        $etr = date("m/d h:ia", strtotime($etr));
+        $etr = str_replace(array('am','pm'),array(' a.m.',' p.m.'),date("n/j g:ia", strtotime($etr)));
     } else {
         $etr = "TBD";
     }

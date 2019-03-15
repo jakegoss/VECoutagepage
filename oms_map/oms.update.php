@@ -59,10 +59,10 @@ for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
     $town = $row['town'];
     $tk = $row['tk'];
     $off = $row['off'];
-    $off = date("m/j h:ia", strtotime($off));
+    $off = str_replace(array('am','pm'),array(' a.m.',' p.m.'),date("n/j g:ia", strtotime($off)));
     $etr = $row['etr'];
     if ($etr != null) {
-        $etr = date("m/j h:ia", strtotime($etr));
+        $etr = str_replace(array('am','pm'),array(' a.m.',' p.m.'),date("n/j g:ia", strtotime($etr)));
     } else {
         $etr = "TBD";
     }
@@ -143,7 +143,7 @@ if ($outage_count > 0) {
             $line = $row1['line'];
 
             if (($etr != null) and ($etr != "0000-00-00 00:00:00")) {
-                $etr = date("m/d h:ia", strtotime($etr));
+                $etr = str_replace(array('am','pm'),array(' a.m.',' p.m.'),date("n/j g:ia", strtotime($etr)));
             } else {
                 $etr = "TBD";
             }
