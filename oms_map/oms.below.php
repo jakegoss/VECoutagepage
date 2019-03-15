@@ -57,12 +57,12 @@ for($x = 0 ; $x < mysqli_num_rows($resultID) ; $x++){
 	 $desc = $row['desc'];
 
 	 echo "<tr>
-	 <td><font size=3>$town</font></td>
-	 <td bgcolor='#f5f5f5'><font size=3>$numout</font></td>
-	 <td><font size=3>$off</font></td>
-	 <td bgcolor='#f5f5f5'><font size=3>$on</font></td>
-	 <td><font size=3>$cause</font></td>
-	 <td bgcolor='#f5f5f5'><font size=3>$tk</font></td></tr>\n";
+	 <td align=center><font size=3>$town</font></td>
+	 <td align=center bgcolor='#f5f5f5'><font size=3>$numout</font></td>
+	 <td align=center><font size=3>$off</font></td>
+	 <td align=center bgcolor='#f5f5f5'><font size=3>$on</font></td>
+	 <td align=center><font size=3>$cause</font></td>
+	 <td align=center bgcolor='#f5f5f5'><font size=3>$tk</font></td></tr>\n";
 	 }
 echo "</table>&nbsp;\n";
 if (mysqli_num_rows($resultID) == 0) {
