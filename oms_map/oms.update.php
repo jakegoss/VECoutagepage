@@ -36,9 +36,9 @@ $town_total = mysqli_num_rows($resultID2);
 $query = "select *,max(timestamp) from oms_by_town_live group by tk,town order by town,off";
 $resultID = mysqli_query($linkID,$query);
 
-if (mysqli_num_rows($resultID) == 0) {
-   echo "<b>There are no outages at this time.</b><br>\n";
-} else {
+// if (mysqli_num_rows($resultID) == 0) {
+//    echo "<b>There are no outages at this time.</b><br>\n";
+// } else {
 
 
 $query_total = "select Total_Out from nbr_out";
@@ -152,7 +152,7 @@ $updated = date("m/d h:ia", strtotime($updated));
         <th bgcolor='#e47322' align=center><font color='white' size=3>Town(s) Affected</font></th>\n";
   echo $updatedata;
   echo "</table>";
-}
+// }
 
 
 
