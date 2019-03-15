@@ -1,4 +1,4 @@
-<!-- Oms Last 24 hours -->
+<!-- Oms Last 24 hours for lower section -->
 
 
 <?php
