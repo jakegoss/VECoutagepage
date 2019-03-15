@@ -51,7 +51,7 @@ $query = "show table status where Name = 'oms_by_town_live'";
 $resultID = mysqli_query($linkID, $query);
 $row = mysqli_fetch_assoc($resultID);
 $updated = $row['Update_time'];
-$updated = date("m/d h:ia", strtotime($updated));
+$updated = str_replace(array('am','pm'),array(' a.m.',' p.m.'),date("n/j g:ia", strtotime($updated)));
 
 for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
     $row = mysqli_fetch_assoc($resultID);
@@ -59,10 +59,10 @@ for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
     $town = $row['town'];
     $tk = $row['tk'];
     $off = $row['off'];
-    $off = date("m/d h:ia", strtotime($off));
+    $off = date("m/j h:ia", strtotime($off));
     $etr = $row['etr'];
     if ($etr != null) {
-        $etr = date("m/d h:ia", strtotime($etr));
+        $etr = date("m/j h:ia", strtotime($etr));
     } else {
         $etr = "TBD";
     }
@@ -74,6 +74,12 @@ for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
 					  </tr>\n";
 }
 
+if ($total != null) {
+    $total = $row_t['Total_Out'];
+} else {
+    $total = 0;
+}
+
 $updatedata = "<tr>
 	 <td align=center><font size=3>$updated</font></td>
 	 <td align=center><font size=3>$total</font></td>
@@ -83,10 +89,10 @@ $updatedata = "<tr>
 
 echo "<table width=80% cellpadding=4>\n";
 echo "<tr>
-			  <th bgcolor='#e47322' align=center><font color='white' size=3>Last Updated</font></th>
-			  <th bgcolor='#e47322' align=center><font color='white' size=3>Members Affected</font></th>
-			<th bgcolor='#e47322' align=center><font color='white' size=3>Outage Incident(s)</font></th>
-			<th bgcolor='#e47322' align=center><font color='white' size=3>Town(s) Affected</font></th>\n";
+			<th bgcolor='#e47322' align=center><font color='white' size=3>Last Updated</font></th>
+			<th bgcolor='#e47322' align=center><font color='white' size=3>Members Affected</font></th>
+			<th bgcolor='#e47322' align=center><font color='white' size=3>Outage Incidents</font></th>
+			<th bgcolor='#e47322' align=center><font color='white' size=3>Towns Affected</font></th>\n";
 echo $updatedata;
 echo "</table>";
 
