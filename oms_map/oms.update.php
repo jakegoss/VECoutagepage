@@ -14,7 +14,7 @@
 
 <?php
 
-$host  = "localhost";
+$host = "localhost";
 $user = "vec_oms";
 $pass = "i2NoTgNkB9am";
 $database = "vec_oms";
@@ -22,7 +22,7 @@ $database = "vec_oms";
 $total = 0;
 
 $linkID = mysqli_connect($host, $user, $pass, $database) or die("Could not connect to host.");
-mysqli_select_db( $linkID, $database) or die("Could not find database.");
+mysqli_select_db($linkID, $database) or die("Could not find database.");
 
 // query for search and dashboard view
 
@@ -35,7 +35,7 @@ echo "<center>";
 
 $query = "select * from oms_by_town_live";
 $resultID2 = mysqli_query($linkID, $query);
-$town_total = mysqli_num_rows($resultID2); 
+$town_total = mysqli_num_rows($resultID2);
 
 // $query = "select *,max(timestamp) from oms_by_town_live group by tk,town order by town,off";
 // $resultID = mysqli_query($linkID,$query);
@@ -47,122 +47,110 @@ $resultID_t = mysqli_query($linkID, $query_total);
 $row_t = mysqli_fetch_assoc($resultID_t);
 $total = $row_t['Total_Out'];
 
-if (mysqli_num_rows($resultID) == 0) {
-	$query = "show table status where Name = 'oms_by_town_live'";
-	$resultID = mysqli_query($linkID, $query);
-	$row = mysqli_fetch_assoc($resultID);
-	$updated = $row['Update_time'];
-	$updated = date("m/d h:ia", strtotime($updated));
-	
-	
-		for($x = 0 ; $x < mysqli_num_rows($resultID) ; $x++){
-				   $row = mysqli_fetch_assoc($resultID);
-					   $out = $row['out'];
-					  $town = $row['town'];
-					  $tk = $row['tk'];
-					  $off = $row['off'];
-					  $off = date("m/d h:ia", strtotime($off));
-					 $etr = $row['etr'];
-					 if ($etr != NULL) {
-							  $etr = date("m/d h:ia", strtotime($etr));
-					 } else {
-						   $etr = "TBD";
-					 }
-					  $current = $current . "<tr>
+$query = "show table status where Name = 'oms_by_town_live'";
+$resultID = mysqli_query($linkID, $query);
+$row = mysqli_fetch_assoc($resultID);
+$updated = $row['Update_time'];
+$updated = date("m/d h:ia", strtotime($updated));
+
+for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
+    $row = mysqli_fetch_assoc($resultID);
+    $out = $row['out'];
+    $town = $row['town'];
+    $tk = $row['tk'];
+    $off = $row['off'];
+    $off = date("m/d h:ia", strtotime($off));
+    $etr = $row['etr'];
+    if ($etr != null) {
+        $etr = date("m/d h:ia", strtotime($etr));
+    } else {
+        $etr = "TBD";
+    }
+    $current = $current . "<tr>
 					  <td align=center><font size=3>$updated</font></td>
 					  <td align=center><font size=3>$town</font></td>
 					  <td align=center><font size=3>$out</font></td>
 					  <td align=center><font size=3>$off</font></td>
 					  </tr>\n";
-		}
-	
-		$updatedata = "<tr>
+}
+
+$updatedata = "<tr>
 	 <td align=center><font size=3>$updated</font></td>
 	 <td align=center><font size=3>$total</font></td>
 	 <td align=center><font size=3>$outage_count</font></td>
 	 <td align=center><font size=3>$town_total</font></td>
 	 </tr>\n";
-	
-	  echo "<table width=80% cellpadding=4>\n";
-	  echo "<tr>
+
+echo "<table width=80% cellpadding=4>\n";
+echo "<tr>
 			  <th bgcolor='#e47322' align=center><font color='white' size=3>Last Updated</font></th>
 			  <th bgcolor='#e47322' align=center><font color='white' size=3>Members Affected</font></th>
 			<th bgcolor='#e47322' align=center><font color='white' size=3>Outage Incident(s)</font></th>
 			<th bgcolor='#e47322' align=center><font color='white' size=3>Town(s) Affected</font></th>\n";
-	  echo $updatedata;
-	  echo "</table>";
-	
-} else {
+echo $updatedata;
+echo "</table>";
 
+if ($outage_count > 0) {
 
-echo "<div padding-top: 10px; margin-bottom: 10px;'>";
-echo "<form action='".$_SERVER["PHP_SELF"]."' style='background-color: #ffffff; height: 25px;' method='post'>Account Number: <input size=20 name=search> <input type=submit value='Search'> </form>\n";
-echo "<p><font size=3>Enter your account number to get the estimated restoration time for your outage.<br>If you do not know your account number, please call 1-800-832-2667.</font></p><br>\n";
- echo "</div>";
- 
-$search = filter_var($_REQUEST['search'],FILTER_SANITIZE_STRING,FILTER_FLAG_ENCODE_AMP);
+    echo "<div padding-top: 10px; margin-bottom: 10px;'>";
+    echo "<form action='" . $_SERVER["PHP_SELF"] . "' style='background-color: #ffffff; height: 25px;' method='post'>Account Number: <input size=20 name=search> <input type=submit value='Search'> </form>\n";
+    echo "<p><font size=3>Enter your account number to get the estimated restoration time for your outage.<br>If you do not know your account number, please call 1-800-832-2667.</font></p><br>\n";
+    echo "</div>";
+
+    $search = filter_var($_REQUEST['search'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_AMP);
 
 // query for search
 
 #if ($search > 1) {
-#	 $ip = $_SERVER['REMOTE_ADDR'];
-#	 $query = "insert into oms_lookup_log (search,ip) VALUES ('$search','$ip')";
-#	 mysqli_query($linkID, $query);
-	 
-#	 $query = "SELECT ip, search FROM `oms_lookup_log` where timestamp > DATE_SUB(NOW(), INTERVAL 5 MINUTE) and ip = '$ip'";
-#	 $resultID2 = mysqli_query($linkID, $query);
-#     $row2 = mysqli_fetch_assoc($resultID2);
-#	 $trys = mysqli_num_rows($resultID2);
-   
-#	 if ($trys > 10) {
-#	 		echo "<b>Due to security the system can only be queried every 5 minutes</b><br><br>\n";
-#			$search = "";
-#	 }
-#}
+    #     $ip = $_SERVER['REMOTE_ADDR'];
+    #     $query = "insert into oms_lookup_log (search,ip) VALUES ('$search','$ip')";
+    #     mysqli_query($linkID, $query);
 
+#     $query = "SELECT ip, search FROM `oms_lookup_log` where timestamp > DATE_SUB(NOW(), INTERVAL 5 MINUTE) and ip = '$ip'";
+    #     $resultID2 = mysqli_query($linkID, $query);
+    #     $row2 = mysqli_fetch_assoc($resultID2);
+    #     $trys = mysqli_num_rows($resultID2);
 
+#     if ($trys > 10) {
+    #             echo "<b>Due to security the system can only be queried every 5 minutes</b><br><br>\n";
+    #            $search = "";
+    #     }
+    #}
 
-if ($search > 1) {
+    if ($search > 1) {
 
-	 $query = "select * from oms_lookup where search='$search' and etr is NULL";
-	 $resultID1 = mysqli_query($linkID, $query);
-	 $outage_search = mysqli_num_rows($resultID1);
-	 if (mysqli_num_rows($resultID1) == 0) {
-	 	 $query = "select * from oms_lookup where search=md5('$search') order by etr desc";
-	 	 $resultID1 = mysqli_query($linkID, $query);
-	 	 $outage_search = mysqli_num_rows($resultID1);
-	 }
+        $query = "select * from oms_lookup where search='$search' and etr is NULL";
+        $resultID1 = mysqli_query($linkID, $query);
+        $outage_search = mysqli_num_rows($resultID1);
+        if (mysqli_num_rows($resultID1) == 0) {
+            $query = "select * from oms_lookup where search=md5('$search') order by etr desc";
+            $resultID1 = mysqli_query($linkID, $query);
+            $outage_search = mysqli_num_rows($resultID1);
+        }
 
-	 if (mysqli_num_rows($resultID1) == 0) {
-   		echo "<b>Account Not Found</b><br>\n";
-	 } else {
-	 	 $row1 = mysqli_fetch_assoc($resultID1);
-		 $account = "Found";
-		 $etr = $row1['etr'];
-		 $line = $row1['line'];
-		 
-		 if (($etr != NULL) and ($etr != "0000-00-00 00:00:00")) {
-	 	 		$etr = date("m/d h:ia", strtotime($etr));
-		 } else {
-		 	  $etr = "TBD";
-		 }
-		 
-	       
-	 	 echo "<table width=100% cellpadding=4>\n";
-		 echo "<tr><th bgcolor='#cccccc' align=left ><font size=2>Account</font></th><th bgcolor='#cccccc' align=left><font size=2>Estimated<br>Restoration Time</font></th><th bgcolor='#cccccc' align=center><font   size=2>Ticket#</font></th></tr>\n";
-		 echo "<tr><td><font size=2>$account</font></td><td><font size=2>$etr</font></td><td><font size=2>$line</font></td>\n";
-		 echo "</table>";
-		
-	 }
-	 echo "<br><br>\n";
+        if (mysqli_num_rows($resultID1) == 0) {
+            echo "<b>Account Not Found</b><br>\n";
+        } else {
+            $row1 = mysqli_fetch_assoc($resultID1);
+            $account = "Found";
+            $etr = $row1['etr'];
+            $line = $row1['line'];
+
+            if (($etr != null) and ($etr != "0000-00-00 00:00:00")) {
+                $etr = date("m/d h:ia", strtotime($etr));
+            } else {
+                $etr = "TBD";
+            }
+
+            echo "<table width=100% cellpadding=4>\n";
+            echo "<tr><th bgcolor='#cccccc' align=left ><font size=2>Account</font></th><th bgcolor='#cccccc' align=left><font size=2>Estimated<br>Restoration Time</font></th><th bgcolor='#cccccc' align=center><font   size=2>Ticket#</font></th></tr>\n";
+            echo "<tr><td><font size=2>$account</font></td><td><font size=2>$etr</font></td><td><font size=2>$line</font></td>\n";
+            echo "</table>";
+
+        }
+        echo "<br><br>\n";
+    }
 }
-}
-
-
-
-
-
-
 
 ?>
 
