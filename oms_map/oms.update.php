@@ -24,22 +24,27 @@ $total = 0;
 $linkID = mysqli_connect($host, $user, $pass, $database) or die("Could not connect to host.");
 mysqli_select_db( $linkID, $database) or die("Could not find database.");
 
+// query for search and dashboard view
+
 $query = "select *,max(timestamp) from oms_by_town_live group by tk";
 $resultID = mysqli_query($linkID, $query);
 $outage_count = mysqli_num_rows($resultID);
 echo "<center>";
 
+// query for total towns affected
+
 $query = "select * from oms_by_town_live";
 $resultID2 = mysqli_query($linkID, $query);
 $town_total = mysqli_num_rows($resultID2); 
 
-$query = "select *,max(timestamp) from oms_by_town_live group by tk,town order by town,off";
-$resultID = mysqli_query($linkID,$query);
+// $query = "select *,max(timestamp) from oms_by_town_live group by tk,town order by town,off";
+// $resultID = mysqli_query($linkID,$query);
 
 // if (mysqli_num_rows($resultID) == 0) {
 //    echo "<b>There are no outages at this time.</b><br>\n";
 // } else {
 
+	// query total out for dashboard
 
 $query_total = "select Total_Out from nbr_out";
 $resultID_t = mysqli_query($linkID, $query_total);
@@ -55,6 +60,7 @@ echo "<p><font size=3>Enter your account number to get the estimated restoration
  
 $search = filter_var($_REQUEST['search'],FILTER_SANITIZE_STRING,FILTER_FLAG_ENCODE_AMP);
 
+// query for search
 
 #if ($search > 1) {
 #	 $ip = $_SERVER['REMOTE_ADDR'];
@@ -108,6 +114,8 @@ if ($search > 1) {
 	 }
 	 echo "<br><br>\n";
 }
+
+
 
 $query = "show table status where Name = 'oms_by_town_live'";
 $resultID = mysqli_query($linkID, $query);
