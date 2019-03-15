@@ -40,59 +40,17 @@ $town_total = mysqli_num_rows($resultID2);
 // $query = "select *,max(timestamp) from oms_by_town_live group by tk,town order by town,off";
 // $resultID = mysqli_query($linkID,$query);
 
-// query total out for dashboard
+// if (mysqli_num_rows($resultID) == 0) {
+//    echo "<b>There are no outages at this time.</b><br>\n";
+// } else {
+
+	// query total out for dashboard
 
 $query_total = "select Total_Out from nbr_out";
 $resultID_t = mysqli_query($linkID, $query_total);
 $row_t = mysqli_fetch_assoc($resultID_t);
 $total = $row_t['Total_Out'];
 
-if (mysqli_num_rows($resultID) == 0) {
-	$query = "show table status where Name = 'oms_by_town_live'";
-	$resultID = mysqli_query($linkID, $query);
-	$row = mysqli_fetch_assoc($resultID);
-	$updated = $row['Update_time'];
-	$updated = date("m/d h:ia", strtotime($updated));
-	
-	
-		for($x = 0 ; $x < mysqli_num_rows($resultID) ; $x++){
-				   $row = mysqli_fetch_assoc($resultID);
-					   $out = $row['out'];
-					  $town = $row['town'];
-					  $tk = $row['tk'];
-					  $off = $row['off'];
-					  $off = date("m/d h:ia", strtotime($off));
-					 $etr = $row['etr'];
-					 if ($etr != NULL) {
-							  $etr = date("m/d h:ia", strtotime($etr));
-					 } else {
-						   $etr = "TBD";
-					 }
-					  $current = $current . "<tr>
-					  <td align=center><font size=3>$updated</font></td>
-					  <td align=center><font size=3>$town</font></td>
-					  <td align=center><font size=3>$out</font></td>
-					  <td align=center><font size=3>$off</font></td>
-					  </tr>\n";
-		}
-	
-		$updatedata = "<tr>
-	 <td align=center><font size=3>$updated</font></td>
-	 <td align=center><font size=3>$total</font></td>
-	 <td align=center><font size=3>$outage_count</font></td>
-	 <td align=center><font size=3>$town_total</font></td>
-	 </tr>\n";
-	
-	  echo "<table width=80% cellpadding=4>\n";
-	  echo "<tr>
-			  <th bgcolor='#e47322' align=center><font color='white' size=3>Last Updated</font></th>
-			  <th bgcolor='#e47322' align=center><font color='white' size=3>Members Affected</font></th>
-			<th bgcolor='#e47322' align=center><font color='white' size=3>Outage Incident(s)</font></th>
-			<th bgcolor='#e47322' align=center><font color='white' size=3>Town(s) Affected</font></th>\n";
-	  echo $updatedata;
-	  echo "</table>";
-	
-} else {
 
 
 echo "<div padding-top: 10px; margin-bottom: 10px;'>";
@@ -156,10 +114,53 @@ if ($search > 1) {
 	 }
 	 echo "<br><br>\n";
 }
-}
 
 
 
+$query = "show table status where Name = 'oms_by_town_live'";
+$resultID = mysqli_query($linkID, $query);
+$row = mysqli_fetch_assoc($resultID);
+$updated = $row['Update_time'];
+$updated = date("m/d h:ia", strtotime($updated));
+
+
+	for($x = 0 ; $x < mysqli_num_rows($resultID) ; $x++){
+  			 $row = mysqli_fetch_assoc($resultID);
+ 	 			 $out = $row['out'];
+	 			 $town = $row['town'];
+	 			 $tk = $row['tk'];
+	 			 $off = $row['off'];
+	 			 $off = date("m/d h:ia", strtotime($off));
+				 $etr = $row['etr'];
+				 if ($etr != NULL) {
+	 			 		$etr = date("m/d h:ia", strtotime($etr));
+				 } else {
+				 	  $etr = "TBD";
+				 }
+	 			 $current = $current . "<tr>
+	 			 <td align=center><font size=3>$updated</font></td>
+	 			 <td align=center><font size=3>$town</font></td>
+	 			 <td align=center><font size=3>$out</font></td>
+	 			 <td align=center><font size=3>$off</font></td>
+	 			 </tr>\n";
+	}
+
+	$updatedata = "<tr>
+ <td align=center><font size=3>$updated</font></td>
+ <td align=center><font size=3>$total</font></td>
+ <td align=center><font size=3>$outage_count</font></td>
+ <td align=center><font size=3>$town_total</font></td>
+ </tr>\n";
+
+  echo "<table width=80% cellpadding=4>\n";
+  echo "<tr>
+  		<th bgcolor='#e47322' align=center><font color='white' size=3>Last Updated</font></th>
+  		<th bgcolor='#e47322' align=center><font color='white' size=3>Members Affected</font></th>
+        <th bgcolor='#e47322' align=center><font color='white' size=3>Outage Incident(s)</font></th>
+        <th bgcolor='#e47322' align=center><font color='white' size=3>Town(s) Affected</font></th>\n";
+  echo $updatedata;
+  echo "</table>";
+// }
 
 
 
