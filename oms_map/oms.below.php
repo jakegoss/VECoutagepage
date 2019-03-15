@@ -34,10 +34,9 @@ mysqli_select_db( $linkID, $database) or die("Could not find database.");
 <tr>
 <th bgcolor='#0082c8'><font color="white" size=3>Town</font></th>
 <th bgcolor='#0082c8' ><font color="white" size=3>#M</font></th>
-<th bgcolor='#0082c8'><font color="white" size=3>Time Off</font></th>
+<th bgcolor='#0082c8'><font  color="white" size=3>Time Off</font></th>
 <th bgcolor='#0082c8'><font color="white" size=3>Time on</font></th>
 <th bgcolor='#0082c8'><font color="white" size=3>Cause</font></th>
-<th bgcolor='#0082c8'><font color="white" size=3>Desc.</font></th>
 <th bgcolor='#0082c8'><font color="white" size=3>Ticket#</font></th></tr>
 </thead>
 
@@ -57,7 +56,13 @@ for($x = 0 ; $x < mysqli_num_rows($resultID) ; $x++){
 	 $cause = $row['cause'];
 	 $desc = $row['desc'];
 
-	 echo "<tr><td><font size=2>$town</font></td><td bgcolor='#f5f5f5'><font size=2>$numout</font></td><td><font size=2>$off</font></td><td bgcolor='#f5f5f5'><font size=2>$on</font></td><td><font size=2>$cause</font></td><td bgcolor='#f5f5f5'><font size=2>$desc</font></td><td><font size=2>$tk</font></td></tr>\n";
+	 echo "<tr>
+	 <td><font size=3>$town</font></td>
+	 <td bgcolor='#f5f5f5'><font size=3>$numout</font></td>
+	 <td><font size=3>$off</font></td>
+	 <td bgcolor='#f5f5f5'><font size=3>$on</font></td>
+	 <td><font size=3>$cause</font></td>
+	 <td bgcolor='#f5f5f5'><font size=3>$tk</font></td></tr>\n";
 	 }
 echo "</table>&nbsp;\n";
 if (mysqli_num_rows($resultID) == 0) {
