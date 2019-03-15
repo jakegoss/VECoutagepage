@@ -22,11 +22,10 @@ L.geoJson(serviceTowns, {
 
 // set choropleth params from metersOut in outageValues
 function getColor(percentOut) {
-    return percentOut > 80 ? '#FF0000' :
-        percentOut > 60 ? '#FFA500' :
-            percentOut > 40 ? '#FFFF00' :
-                percentOut > 20 ? '#7CFC00' :
-                    percentOut > 0 ? '#0000FF' :
+    return percentOut > 75 ? '#FF0000' :
+        percentOut > 50 ? '#FFA500' :
+            percentOut > 25 ? '#FFFF00' :
+                percentOut > 1 ? '#7CFC00' :
                         'grey';
 }
 
@@ -148,7 +147,7 @@ const legend = L.control({ position: 'bottomleft' });
 legend.onAdd = function (map) {
 
     let div = L.DomUtil.create('div', 'info legend'),
-        grades = [1, 20, 40, 60, 80],
+        grades = [1, 25, 50, 75],
         labels = [],
         from, to;
 
@@ -159,7 +158,7 @@ legend.onAdd = function (map) {
 
         div.innerHTML =
             labels.push(
-                '<i style="background:' + getColor(from + 1) + '"></i> ' + from + (to ? '&ndash;' + to : '+'));
+               '<i style="background:' + getColor(from + 1) + '"></i> ' + from + (to ? '&ndash;' + to : '&ndash;100'));
     }
     div.innerHTML = labels.join('<br>');
     return div;
