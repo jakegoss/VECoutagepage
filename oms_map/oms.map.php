@@ -12,6 +12,8 @@ $conn = mysqli_connect($host, $user, $pass, $database);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
+
+// ////// sorting query is not being used but saved if they change their mind /////////
 // $sortBy = array('town');
 
 // $order = 'off';
@@ -21,6 +23,8 @@ if (!$conn) {
 
 //Select # of live outages
 // $outageDataSql = "SELECT * FROM oms_by_town_live_percent ORDER BY " . $order;
+///////////////////////////
+
 $outageDataSql = "SELECT * FROM oms_by_town_live_percent group by tk ";
 
 $outageDataResult = mysqli_query($conn, $outageDataSql);
@@ -59,8 +63,8 @@ foreach ($outageData as $percent) {
     <script src="leaflet.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
     <script src="serviceTowns.js"></script>
-    <link rel="stylesheet" href="leaflet.css" />
-    <link rel="stylesheet" href="map.css" />
+    <link rel="stylesheet" href="leaflet.css"?v=1 />
+    <link rel="stylesheet" href="map.css"?v=3 />
 
 </head>
 
@@ -97,21 +101,21 @@ for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
     }
 
     $current = $current . "<tr>
-    <td align=center><font size=3>$town</font></td>
-    <td align=center bgcolor='#f5f5f5'><font size=3>$out</font></td>
-    <td align=center><font size=3>$off</font></td>
-    <td align=center bgcolor='#f5f5f5'><font size=3>$etr</font></td>
-    <td align=center><font size=3>$percent</font></td>
+    <td align=center><font>$town</font></td>
+    <td align=center bgcolor='#f5f5f5'><font>$out</font></td>
+    <td align=center><font>$off</font></td>
+    <td align=center bgcolor='#f5f5f5'><font>$etr</font></td>
+    <td align=center><font>$percent</font></td>
     </tr>";
 }
 
-echo "<table align=center width=90% cellpadding=3>\n";
+echo "<table align=center cellpadding=3>\n";
 echo "<tr class='cTable'>
-    <th bgcolor='#1682c8'><font color='white' size=3>Town</font></th>
-    <th bgcolor='#1682c8'><font color='white' size=3># of Member<br>Outages</font></th>
-    <th bgcolor='#1682c8'><font color='white' size=3>Time Off</font></th>
-    <th bgcolor='#1682c8'><font color='white' size=3>Estimated<br>Restoration Time</font></th>
-    <th bgcolor='#1682c8'><font color='white' size=3>Percent Out</font></th>
+    <th bgcolor='#1682c8'><font color='white'>Town</font></th>
+    <th bgcolor='#1682c8'><font color='white'># of Member<br>Outages</font></th>
+    <th bgcolor='#1682c8'><font color='white'>Time Off</font></th>
+    <th bgcolor='#1682c8'><font color='white'>Estimated<br>Restoration Time</font></th>
+    <th bgcolor='#1682c8'><font color='white'>Percent Out</font></th>
     </tr>\n";
 echo $current;
 "\n";

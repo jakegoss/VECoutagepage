@@ -25,7 +25,7 @@ function getColor(percentOut) {
     return percentOut > 75 ? '#FF0000' :
         percentOut > 50 ? '#FFA500' :
             percentOut > 25 ? '#FFFF00' :
-                percentOut > 1 ? '#7CFC00' :
+                percentOut > 0 ? '#7CFC00' :
                         'grey';
 }
 

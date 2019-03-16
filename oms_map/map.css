@@ -1,31 +1,32 @@
 body {
-    display: flex;
-    /* display: grid;
+    display: grid;
     grid-template-columns: 3fr 1fr;
-    grid-template-rows: auto; */
-    flex-wrap: wrap;
-    justify-content: center;
+    grid-template-rows: auto;
+    margin-left: 0;
+    overflow: scroll;
 }
 
 #mapid {
-    /* grid-column: 1,2;
-    grid-row: 1,2; */
-    height: 85vh;
-    width: 60vw;
+    grid-column: 1;
+    grid-row: 1;
+    height: 95vh;
+    width: 66vw;
     border: 2px solid black !important;
 }
 
 #outTable{
-    /* grid-column: 2,3;
-    grid-row: 1,2; */
+    grid-column: 2;
+    grid-row: 1;
     font-family: 'Source Sans Pro', sans-serif !important;
+    width: 90%;
+    height: auto;
 }
-/* #outTable th {
-    font-weight: lighter !important;
+#outTable th {
+    font-weight: normal !important;
 }
 #outTable td {
-    font-weight: lighter !important;
-} */
+    font-weight: normal !important;
+}
 
 table{
     margin: auto;
@@ -70,10 +71,56 @@ table{
     margin-right: 8px;
     opacity: 0.7;
 }
-@media only screen and (max-width: 480px) {
-#mapid {
-    height: 85vh;
-    width: 90vw;
-    border: 2px solid black !important;
+@media only screen and (max-width: 520px) {
+    body {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        overflow: scroll;
+        margin-left: 0;
+        font-size: small !important;
+        font-weight: lighter !important;
+    }
+    
+    #mapid {
+        grid-column: 1;
+        grid-row: 1;
+        height: 72vh;
+        width: 95vw;
+    }
+    
+    #outTable{
+        grid-column: 1;
+        grid-row: 2;
+        width: 99%;
+        height: auto;
+        font-size: smaller !important;
+    }
 }
+
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+    body {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: auto;
+        overflow: scroll;
+        margin-left: 0;
+        font-size: small !important;
+        /* font-weight: lighter !important; */
+    }
+    
+    #mapid {
+        grid-column: 1;
+        grid-row: 1;
+        height: 85vh;
+        width: 85vw;
+    }
+    
+    #outTable{
+        grid-column: 2;
+        grid-row: 1;
+        width: 90%;
+        height: auto;
+        font-size: smaller !important;
+    }
 }
