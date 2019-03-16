@@ -30,14 +30,14 @@ mysqli_select_db( $linkID, $database) or die("Could not find database.");
 ?>
 
 <h4 style="text-align: center;">Recent Outages (last 24 hours)</h4>
-<Table class="outage" border='0' cellspacing='1' cellpadding='3' width=100%>   <thead > 
+<table class="outage">   <thead > 
 <tr>
-<th bgcolor='#0082c8'><font color="white" size=3>Town</font></th>
-<th bgcolor='#0082c8' ><font color="white" size=3>#M</font></th>
-<th bgcolor='#0082c8'><font  color="white" size=3>Time Off</font></th>
-<th bgcolor='#0082c8'><font color="white" size=3>Time on</font></th>
-<th bgcolor='#0082c8'><font color="white" size=3>Cause</font></th>
-<th bgcolor='#0082c8'><font color="white" size=3>Ticket#</font></th></tr>
+<th bgcolor='#0082c8'><font color="white">Town</font></th>
+<th bgcolor='#0082c8' ><font color="white">#M</font></th>
+<th bgcolor='#0082c8'><font  color="white">Time Off</font></th>
+<th bgcolor='#0082c8'><font color="white">Time on</font></th>
+<th bgcolor='#0082c8'><font color="white">Cause</font></th>
+<th bgcolor='#0082c8'><font color="white">Ticket#</font></th></tr>
 </thead>
 
 <?php
@@ -57,12 +57,12 @@ for($x = 0 ; $x < mysqli_num_rows($resultID) ; $x++){
 	 $desc = $row['desc'];
 
 	 echo "<tr>
-	 <td align=center><font size=3>$town</font></td>
-	 <td align=center bgcolor='#f5f5f5'><font size=3>$numout</font></td>
-	 <td align=center><font size=3>$off</font></td>
-	 <td align=center bgcolor='#f5f5f5'><font size=3>$on</font></td>
-	 <td align=center><font size=3>$cause</font></td>
-	 <td align=center bgcolor='#f5f5f5'><font size=3>$tk</font></td></tr>\n";
+	 <td align=center>$town</td>
+	 <td align=center bgcolor='#f5f5f5'>$numout</td>
+	 <td align=center>$off</td>
+	 <td align=center bgcolor='#f5f5f5'>$on</td>
+	 <td align=center>$cause</td>
+	 <td align=center bgcolor='#f5f5f5'>$tk</td></tr>\n";
 	 }
 echo "</table>&nbsp;\n";
 if (mysqli_num_rows($resultID) == 0) {

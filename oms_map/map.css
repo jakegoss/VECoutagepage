@@ -94,7 +94,7 @@ table{
         grid-row: 2;
         width: 99%;
         height: auto;
-        font-size: smaller !important;
+        /* font-size: smaller !important; */
     }
 }
 

@@ -67,10 +67,10 @@ for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
         $etr = "TBD";
     }
     $current = $current . "<tr>
-					  <td align=center><font size=3>$updated</font></td>
-					  <td align=center><font size=3>$town</font></td>
-					  <td align=center><font size=3>$out</font></td>
-					  <td align=center><font size=3>$off</font></td>
+					  <td align=center><font>$updated</font></td>
+					  <td align=center><font>$town</font></td>
+					  <td align=center><font>$out</font></td>
+					  <td align=center><font>$off</font></td>
 					  </tr>\n";
 }
 
@@ -81,18 +81,18 @@ if ($total != null) {
 }
 
 $updatedata = "<tr>
-	 <td align=center><font size=3>$updated</font></td>
-	 <td align=center><font size=3>$total</font></td>
-	 <td align=center><font size=3>$outage_count</font></td>
-	 <td align=center><font size=3>$town_total</font></td>
+	 <td align=center><font>$updated</font></td>
+	 <td align=center><font>$total</font></td>
+	 <td align=center><font>$outage_count</font></td>
+	 <td align=center><font>$town_total</font></td>
 	 </tr>\n";
 
-echo "<table width=80% cellpadding=4>\n";
+echo "<table class='dash' cellpadding=4>\n";
 echo "<tr>
-			<th bgcolor='#e47322' align=center><font color='white' size=3>Last Updated</font></th>
-			<th bgcolor='#e47322' align=center><font color='white' size=3>Members Affected</font></th>
-			<th bgcolor='#e47322' align=center><font color='white' size=3>Outage Incidents</font></th>
-			<th bgcolor='#e47322' align=center><font color='white' size=3>Towns Affected</font></th>\n";
+			<th bgcolor='#e47322' align=center><font color='white'>Last Updated</font></th>
+			<th bgcolor='#e47322' align=center><font color='white'>Members Affected</font></th>
+			<th bgcolor='#e47322' align=center><font color='white'>Outage Incidents</font></th>
+			<th bgcolor='#e47322' align=center><font color='white'>Towns Affected</font></th>\n";
 echo $updatedata;
 echo "</table>";
 

@@ -1,9 +1,16 @@
 
 table.outage col:first-child {background-color: #FF0}
 table.outage col:nth-child(2n+3) {background-color: #FF0}
-table.outage {font-family: 'Source Sans Pro', sans-serif !important; font-size:16px !important}
-
-
+table.outage {
+	font-family: 'Source Sans Pro', sans-serif !important; 
+	font-size:16px !important;
+	width: 90vw;
+	margin: auto;
+}
+table.outage td {
+	padding: 3;
+}
+table.dash
 .header-2 {text-align:center !important}
 
 .header-2 img {text-align:center !important}
@@ -8975,6 +8982,10 @@ padding: 7px 23px 7px 23px !important;
 }
 table.outage {
 		font-size: 13px !important;
+		width: 90vw;
+}
+table.outage td {
+	padding: 2;
 }
 }
 
