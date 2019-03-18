@@ -128,7 +128,7 @@ info.update = function (props) {
         town = props.townMC;
     }
 
-    let message = 'Hover over a town';
+    let message = 'Click on a town';
     if (props) {
         message = (metersOut + ' Members affected in ' + town + '<br/>' + percentOut + '% of ' + town + ' affected' + '<br/>'
         );

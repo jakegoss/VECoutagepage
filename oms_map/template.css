@@ -27,7 +27,7 @@ table.dash th{
 
 
 .wrapperoutageUpdate {
-	height: ;
+	height: fit-content;
 }
 
 table.member {width:100%; }

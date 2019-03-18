@@ -626,3 +626,15 @@
 	margin-left: -12px;
 	border-right-color: #fff;
 	}
+
+
+	@media only screen and (max-width: 520px) {
+	.leaflet-right .leaflet-control {
+		position: relative;
+		right: 0;
+		top: 255px;
+		}
+		.leaflet-left .leaflet-control {
+			/* margin-left: 10px; */
+			}
+	}
