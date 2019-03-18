@@ -26,6 +26,10 @@ table.dash th{
 .header-2 img {text-align:center !important}
 
 
+.wrapperoutageUpdate {
+	height: ;
+}
+
 table.member {width:100%; }
 table.member td {padding:0px 30px 0px 30px; vertical-align: top; text-align: center; }
 
@@ -1859,7 +1863,7 @@ input[type="color"],
 input,
 textarea,
 .uneditable-input {
-	width: 206px;
+	width: auto;
 }
 textarea {
 	height: auto;

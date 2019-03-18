@@ -27,15 +27,15 @@ body {
 }
 #outTable th {
     font-weight: normal !important;
+    padding: 5px;
 }
 #outTable td {
     font-weight: normal !important;
+    padding: 5px;
 }
-
 table{
     margin: auto;
     border: 1px solid #454545;
-    padding: 3px;
 }
 .cTable th{
 	font-weight: normal !important;
@@ -131,3 +131,33 @@ table{
         font-size: smaller !important;
     }
 }
+@media only screen and (min-width: 899px) and (max-width: 1280px) {
+    body {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        grid-template-rows: auto;
+        overflow: scroll;
+        margin-left: 0;
+        /* font-size: small !important; */
+        /* font-weight: lighter !important; */
+    }
+    
+    #mapid {
+        grid-column: 1;
+        grid-row: 1;
+        height: 85vh;
+        width: 65vw;
+        margin-left: 4px;
+        margin-right: 2px;
+    }
+    
+    #outTable{
+        grid-column: 2;
+        grid-row: 1;
+        width: 85%;
+        height: auto;
+        /* font-size: smaller !important; */
+    }
+}
+
+
