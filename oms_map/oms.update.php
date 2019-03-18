@@ -87,7 +87,7 @@ $updatedata = "<tr>
 	 <td align=center><font>$town_total</font></td>
 	 </tr>\n";
 
-echo "<table class='dash' cellpadding=4>\n";
+echo "<table class='dash'>\n";
 echo "<tr>
 			<th bgcolor='#e47322' align=center><font color='white'>Last Updated</font></th>
 			<th bgcolor='#e47322' align=center><font color='white'>Members Affected</font></th>

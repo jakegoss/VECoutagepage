@@ -109,7 +109,7 @@ for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
     </tr>";
 }
 
-echo "<table align=center cellpadding=3>\n";
+echo "<table align=center>\n";
 echo "<tr class='cTable'>
     <th bgcolor='#1682c8'><font color='white'>Town</font></th>
     <th bgcolor='#1682c8'><font color='white'># of Member<br>Outages</font></th>

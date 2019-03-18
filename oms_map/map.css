@@ -10,8 +10,11 @@ body {
     grid-column: 1;
     grid-row: 1;
     height: 95vh;
-    width: 66vw;
+    width: 70vw;
     border: 2px solid black !important;
+    margin-left: 6px;
+    margin-right: 4px;
+    justify-self: center;
 }
 
 #outTable{
@@ -20,6 +23,7 @@ body {
     font-family: 'Source Sans Pro', sans-serif !important;
     width: 90%;
     height: auto;
+    justify-self: left;
 }
 #outTable th {
     font-weight: normal !important;
@@ -31,6 +35,7 @@ body {
 table{
     margin: auto;
     border: 1px solid #454545;
+    padding: 3px;
 }
 .cTable th{
 	font-weight: normal !important;
@@ -85,7 +90,7 @@ table{
     #mapid {
         grid-column: 1;
         grid-row: 1;
-        height: 72vh;
+        height: 70vh;
         width: 95vw;
     }
     
@@ -113,7 +118,9 @@ table{
         grid-column: 1;
         grid-row: 1;
         height: 85vh;
-        width: 85vw;
+        width: 65vw;
+        margin-left: 4px;
+        margin-right: 2px;
     }
     
     #outTable{

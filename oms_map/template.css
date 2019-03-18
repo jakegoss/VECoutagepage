@@ -10,7 +10,17 @@ table.outage {
 table.outage td {
 	padding: 3;
 }
-table.dash
+table.dash {
+	max-width: 100%;
+}
+table.dash th{
+	padding-left: 70px;
+	padding-right: 70px;
+}
+/* table.dash td {
+	padding: 4px;
+} */
+
 .header-2 {text-align:center !important}
 
 .header-2 img {text-align:center !important}
@@ -8481,6 +8491,13 @@ body.modal-open {
 .row1 {float:left; max-width:30% !important; margin-right:20px !important;}
 .row2 {float:left; max-width:30% !important; margin-right:20px !important; margin-left:20px !important;}
 .row3 {float:left; max-width:30% !important; margin-left:20px !important;}
+table.dash {
+	max-width: 100%;
+}
+table.dash th{
+	padding-left: 40px;
+	padding-right: 40px;
+}
 }
 
 @media (min-width: 789px) and (max-width: 899px) {
@@ -8489,6 +8506,14 @@ body.modal-open {
 .row3 {float:left; max-width:28% !important; margin-left:20px !important;}
 
 .row1 a, .row2 a, .row3 a {font-size:14px !important} 
+
+table.dash {
+	max-width: 100%;
+}
+table.dash th{
+	padding-left: 20px;
+	padding-right: 20px;
+}
 }
 
 @media (min-width: 0px) and (max-width: 788px) {
@@ -8496,6 +8521,13 @@ body.modal-open {
 .row2 {float:none !important; max-width:100% !important; margin-right:20px !important; margin-left:20px !important; text-align:center !important;}
 .row3 {float:none !important; max-width:100% !important; margin-right:20px !important; margin-left:20px !important; text-align:center !important;}
 .row1 a, .row2 a, .row3 a {font-size:14px !important} 
+table.dash {
+	max-width: 100%;
+}
+table.dash th{
+	padding-left: 10px;
+	padding-right: 10px;
+}
 }
 
 
@@ -8986,6 +9018,12 @@ table.outage {
 }
 table.outage td {
 	padding: 2;
+}
+/* table.dash {
+	max-width: 100%;
+} */
+table.dash th{
+	padding: 3px;
 }
 }
 
