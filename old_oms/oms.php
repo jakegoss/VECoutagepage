@@ -139,7 +139,8 @@ Recent Outages (last 24 hours)<br><br>
 </thead>
 
 <?php
-$query = 'SELECT *,max(timestamp) FROM all_outages where `on` != "" and numout > 0 group by tk,town,off order by `on` desc';
+// $query = 'SELECT *,max(timestamp) FROM all_outages where `on` != "" and numout > 0 group by tk,town,off order by `on` desc';  These queries are not working in this syntax
+$query = 'SELECT * FROM all_outages where numout > 0 order by `on` desc';
 $resultID = mysqli_query($linkID, $query);
 for($x = 0 ; $x < mysqli_num_rows($resultID) ; $x++){
    $row = mysqli_fetch_assoc($resultID);
@@ -160,62 +161,7 @@ if (mysqli_num_rows($resultID) == 0) {
    echo "<b>There are no outages to display.</b><br>\n";
 }
 echo "</center>";
-?>
 
-
-
-<!-- sort demo -->
-
-
-<div id="wrapper">
-<div id="table_div">
-<?php
-$host="localhost";
-$username="root";
-$password="";
-$databasename="sample";
-$connect=mysql_connect($host,$username,$password);
-$db=mysql_select_db($databasename);	 
-
-$order="asc";
-if($_GET['orderby']=="name" && $_GET['order']=="asc")
-{
- $order="desc";
-}
-if($_GET['orderby']=="age" && $_GET['order']=="asc")
-{
- $order="desc";
-}
-if($_GET['orderby']=="salary" && $_GET['order']=="asc")
-{
- $order="desc";
-}
-
-if($_GET['orderby'])
-{
- $orderby="order by ".$_GET['orderby'];
-}
-if($_GET['order'])
-{
- $sort_order=$_GET['order'];
-}
- 
-$get_result=mysql_query("select * from employee ".$orderby." ".$sort_order."");
-echo "<table align=center border=1 cellpadding=10>";
-echo "<tr>";
- echo "<th><a href='?orderby=name&order=".$order."'>Name</a></th>";
- echo "<th><a href='?orderby=age&order=".$order."'>Age</a></th>";
- echo "<th><a href='?orderby=salary&order=".$order."'>Salary</a></th>";
-echo "</tr>";
-while($row=mysql_fetch_array($get_result))
-{
- echo "<tr>";
-  echo "<td>".$row['Name']."</td>";
-  echo "<td>".$row['Age']."</td>";
-  echo "<td>".$row['Salary']."</td>";
- echo "</tr>";
-}
-echo "</table>";
 ?>
 
 </div>

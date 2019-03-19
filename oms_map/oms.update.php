@@ -26,7 +26,8 @@ mysqli_select_db($linkID, $database) or die("Could not find database.");
 
 // query for search and dashboard view
 
-$query = "select *,max(timestamp) from oms_by_town_live group by tk";
+// $query = "select *,max(timestamp) from oms_by_town_live group by tk";
+$query = "select * from oms_by_town_live";
 $resultID = mysqli_query($linkID, $query);
 $outage_count = mysqli_num_rows($resultID);
 echo "<center>";
@@ -87,7 +88,7 @@ $updatedata = "<tr>
 	 <td align=center><font>$town_total</font></td>
 	 </tr>\n";
 
-echo "<table class='dash'>\n";
+echo "<table class='dash' cellpadding=4>\n";
 echo "<tr>
 			<th bgcolor='#e47322' align=center><font color='white'>Last Updated</font></th>
 			<th bgcolor='#e47322' align=center><font color='white'>Members Affected</font></th>
@@ -98,7 +99,7 @@ echo "</table>";
 
 if ($outage_count > 0) {
 
-    echo "<div 'padding-top: 10px;'>";
+     echo "<div 'padding-top: 10px;'>";
     echo "<form action='" . $_SERVER["PHP_SELF"] . "' style='background-color: #ffffff;' method='post'>Account Number: <input name=search> <input type=submit value='Search'> </form>\n";
     echo "<span><font size=3>Enter your account # to get the estimated restoration time for your outage. If you do not know your account number, please call 1-800-832-2667. Note: if you enter your account # and the reply is \"account not found\" your outage is not recorded in our system. Please inform us by calling or through your <a href='https://vermontelectric.smarthub.coop/Login.html'>SmartHub account</a>.</font></span><br>\n";
     echo "</div>";

@@ -42,7 +42,8 @@ mysqli_select_db( $linkID, $database) or die("Could not find database.");
 
 <?php
 
-$query = 'SELECT *,max(timestamp) FROM all_outages where `on` != "" and numout > 0 group by tk,town,off order by `on` desc';
+// $query = 'SELECT *,max(timestamp) FROM all_outages where `on` != "" and numout > 0 group by tk,town,off order by `on` desc';  These queries are not working in this syntax
+$query = 'SELECT * FROM all_outages where numout > 0 order by `on` desc';
 $resultID = mysqli_query($linkID, $query);
 for($x = 0 ; $x < mysqli_num_rows($resultID) ; $x++){
    $row = mysqli_fetch_assoc($resultID);

@@ -25,7 +25,8 @@ if (!$conn) {
 // $outageDataSql = "SELECT * FROM oms_by_town_live_percent ORDER BY " . $order;
 ///////////////////////////
 
-$outageDataSql = "SELECT * FROM oms_by_town_live_percent group by tk ";
+// $outageDataSql = "SELECT * FROM oms_by_town_live_percent group by tk "; These queries are not working in this syntax
+$outageDataSql = "SELECT * FROM oms_by_town_live_percent ";
 
 $outageDataResult = mysqli_query($conn, $outageDataSql);
 $numOutageData = mysqli_num_rows($outageDataResult);
