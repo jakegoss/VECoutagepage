@@ -33,11 +33,11 @@ mysqli_select_db( $linkID, $database) or die("Could not find database.");
 <table class="outage">   <thead > 
 <tr>
 <th bgcolor='#0082c8'><font color="white">Town</font></th>
-<th bgcolor='#0082c8' ><font color="white">#M</font></th>
-<th bgcolor='#0082c8'><font  color="white">Time Off</font></th>
+<th bgcolor='#0082c8'><font color="white">#M</font></th>
+<th bgcolor='#0082c8'><font color="white">Time Off</font></th>
 <th bgcolor='#0082c8'><font color="white">Time on</font></th>
 <th bgcolor='#0082c8'><font color="white">Cause</font></th>
-<th bgcolor='#0082c8'><font color="white">Ticket#</font></th></tr>
+<th bgcolor='#0082c8'><font color="white">Outage ID</font></th></tr>
 </thead>
 
 <?php

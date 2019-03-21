@@ -90,7 +90,8 @@ for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
     // $order = ($_GET['ad']) ? 'asc' : 'desc';
     $row = mysqli_fetch_assoc($resultID);
     $out = $row['out'];
-    $percent = ceil($row['percent']);
+    // $percent = ceil($row['percent']);
+    $tk = $row['tk'];
     $town = $row['town'];
     $off = $row['off'];
     $off = str_replace(array('am','pm'),array(' a.m.',' p.m.'),date("n/j g:ia", strtotime($off)));
@@ -106,7 +107,7 @@ for ($x = 0; $x < mysqli_num_rows($resultID); $x++) {
     <td align=center bgcolor='#f5f5f5'><font>$out</font></td>
     <td align=center><font>$off</font></td>
     <td align=center bgcolor='#f5f5f5'><font>$etr</font></td>
-    <td align=center><font>$percent</font></td>
+    <td align=center><font>$tk</font></td>
     </tr>";
 }
 
@@ -116,7 +117,7 @@ echo "<tr class='cTable'>
     <th bgcolor='#1682c8'><font color='white'># of Member<br>Outages</font></th>
     <th bgcolor='#1682c8'><font color='white'>Time Off</font></th>
     <th bgcolor='#1682c8'><font color='white'>Estimated<br>Restoration Time</font></th>
-    <th bgcolor='#1682c8'><font color='white'>Percent Out</font></th>
+    <th bgcolor='#1682c8'><font color='white'>Outage ID</font></th>
     </tr>\n";
 echo $current;
 "\n";
