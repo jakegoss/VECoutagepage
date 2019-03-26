@@ -92,6 +92,7 @@ table{
         grid-row: 1;
         height: 70vh;
         width: 95vw;
+        overflow: scroll;
     }
     
     #outTable{
@@ -99,7 +100,7 @@ table{
         grid-row: 2;
         width: 99%;
         height: auto;
-        /* font-size: smaller !important; */
+        overflow: scroll;
     }
     .info {
         padding: 4px 6px;
@@ -145,6 +146,7 @@ table{
         width: 90%;
         height: auto;
         font-size: smaller !important;
+        overflow: scroll;
     }
 }
 @media only screen and (min-width: 899px) and (max-width: 1280px) {
